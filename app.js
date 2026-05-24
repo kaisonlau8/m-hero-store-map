@@ -369,6 +369,16 @@ function hideTooltip() {
   els.tooltip.hidden = true;
 }
 
+function bindTooltipDismissal() {
+  document.addEventListener("pointerdown", (event) => {
+    if (els.tooltip.hidden) return;
+    if (event.target.closest(".pin, .store-card, .tooltip")) return;
+    hideTooltip();
+  }, { capture: true });
+
+  els.storeList.addEventListener("scroll", hideTooltip, { passive: true });
+}
+
 function bindMapInteractions() {
   els.viewport.addEventListener("wheel", (event) => {
     event.preventDefault();
@@ -382,6 +392,7 @@ function bindMapInteractions() {
 
   els.viewport.addEventListener("pointerdown", (event) => {
     if (event.target.closest(".pin")) return;
+    hideTooltip();
     event.preventDefault();
     state.activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
     try {
@@ -504,6 +515,7 @@ async function boot() {
   fitMap();
   bindMapInteractions();
   bindControls();
+  bindTooltipDismissal();
 }
 
 boot().catch((error) => {
