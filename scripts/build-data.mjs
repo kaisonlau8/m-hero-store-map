@@ -12,7 +12,8 @@ const { FileBlob, SpreadsheetFile } = (() => {
   }
 })();
 
-const channelDir = "/Users/i/Library/CloudStorage/OneDrive-个人/工作相关/猛士科技（襄阳）有限公司/服务运营/渠道";
+const projectRoot = new URL("../", import.meta.url);
+const sourceDir = new URL("data/source/", projectRoot);
 const sourceXlsx = await resolveSourceWorkbook();
 const outputDir = new URL("../assets/", import.meta.url);
 const dataPath = new URL("stores.json", outputDir);
@@ -64,13 +65,13 @@ async function resolveSourceWorkbook() {
   const explicitPath = process.argv[2] || process.env.STORE_MAP_XLSX;
   if (explicitPath) return path.resolve(explicitPath);
 
-  const entries = await fs.readdir(channelDir, { withFileTypes: true });
+  const entries = await fs.readdir(sourceDir, { withFileTypes: true });
   const candidates = await Promise.all(
     entries
       .filter((entry) => entry.isFile())
       .filter((entry) => /^猛士售后门店清单\d{8}\.xlsx$/.test(entry.name))
       .map(async (entry) => {
-        const fullPath = path.join(channelDir, entry.name);
+        const fullPath = path.join(sourceDir.pathname, entry.name);
         const dateMatch = entry.name.match(/(\d{8})/);
         const stat = await fs.stat(fullPath);
         return { fullPath, dateKey: dateMatch?.[1] ?? "", mtimeMs: stat.mtimeMs };
@@ -78,7 +79,7 @@ async function resolveSourceWorkbook() {
   );
 
   if (!candidates.length) {
-    throw new Error(`No workbook matched 猛士售后门店清单YYYYMMDD.xlsx in ${channelDir}`);
+    throw new Error(`No workbook matched 猛士售后门店清单YYYYMMDD.xlsx in ${sourceDir.pathname}`);
   }
 
   candidates.sort((a, b) => b.dateKey.localeCompare(a.dateKey) || b.mtimeMs - a.mtimeMs);

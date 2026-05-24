@@ -14,10 +14,10 @@ python3 -m http.server 4173
 
 后续门店有增删改时，只需要更新 Excel，再重新生成 `assets/stores.json` 并推送到 GitHub。
 
-默认读取目录：
+默认读取项目内目录：
 
 ```text
-/Users/i/Library/CloudStorage/OneDrive-个人/工作相关/猛士科技（襄阳）有限公司/服务运营/渠道
+data/source/
 ```
 
 默认匹配文件名：
@@ -30,7 +30,7 @@ python3 -m http.server 4173
 
 ### 日常更新流程
 
-1. 把新的门店清单 Excel 放进上面的“渠道”目录。
+1. 把新的门店清单 Excel 放进本项目的 `data/source/` 目录。
 2. 文件名保持 `猛士售后门店清单YYYYMMDD.xlsx` 格式。
 3. 回到本项目目录：
 
@@ -61,6 +61,14 @@ git push
 ```
 
 GitHub Pages 会自动更新线上页面。
+
+建议把新的 Excel 原文件也一起提交，便于追溯数据来源：
+
+```bash
+git add data/source/猛士售后门店清单YYYYMMDD.xlsx assets/stores.json
+git commit -m "Update store map data"
+git push
+```
 
 ### 指定某个 Excel 文件
 
