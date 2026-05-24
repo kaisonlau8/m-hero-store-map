@@ -45,33 +45,48 @@ function walkCoordinates(value, visitor) {
   for (const child of value) walkCoordinates(child, visitor);
 }
 
+const DISPLAY_CENTER_LAT = 35;
+const SOUTH_SEA_BASE_LAT = 18;
+const SOUTH_SEA_COMPRESSION = 0.35;
+
+function displayPoint(lng, lat) {
+  const effectiveLat = lat < SOUTH_SEA_BASE_LAT
+    ? SOUTH_SEA_BASE_LAT + (lat - SOUTH_SEA_BASE_LAT) * SOUTH_SEA_COMPRESSION
+    : lat;
+  return [
+    lng * Math.cos(DISPLAY_CENTER_LAT * Math.PI / 180),
+    effectiveLat,
+  ];
+}
+
 function createProjection(geojson) {
-  let minLng = Infinity;
-  let maxLng = -Infinity;
-  let minLat = Infinity;
-  let maxLat = -Infinity;
+  let minProjectedX = Infinity;
+  let maxProjectedX = -Infinity;
+  let minProjectedY = Infinity;
+  let maxProjectedY = -Infinity;
 
   for (const feature of geojson.features ?? []) {
     walkCoordinates(feature.geometry?.coordinates, ([lng, lat]) => {
-      minLng = Math.min(minLng, lng);
-      maxLng = Math.max(maxLng, lng);
-      minLat = Math.min(minLat, lat);
-      maxLat = Math.max(maxLat, lat);
+      const [x, y] = displayPoint(lng, lat);
+      minProjectedX = Math.min(minProjectedX, x);
+      maxProjectedX = Math.max(maxProjectedX, x);
+      minProjectedY = Math.min(minProjectedY, y);
+      maxProjectedY = Math.max(maxProjectedY, y);
     });
   }
 
   const scale = Math.min(
-    (MAP_WIDTH - MAP_PADDING * 2) / (maxLng - minLng),
-    (MAP_HEIGHT - MAP_PADDING * 2) / (maxLat - minLat),
+    (MAP_WIDTH - MAP_PADDING * 2) / (maxProjectedX - minProjectedX),
+    (MAP_HEIGHT - MAP_PADDING * 2) / (maxProjectedY - minProjectedY),
   );
-  const projectedWidth = (maxLng - minLng) * scale;
-  const projectedHeight = (maxLat - minLat) * scale;
+  const projectedWidth = (maxProjectedX - minProjectedX) * scale;
+  const projectedHeight = (maxProjectedY - minProjectedY) * scale;
   const offsetX = (MAP_WIDTH - projectedWidth) / 2;
   const offsetY = (MAP_HEIGHT - projectedHeight) / 2;
 
   return ([lng, lat]) => [
-    offsetX + (lng - minLng) * scale,
-    offsetY + (maxLat - lat) * scale,
+    offsetX + (displayPoint(lng, lat)[0] - minProjectedX) * scale,
+    offsetY + (maxProjectedY - displayPoint(lng, lat)[1]) * scale,
   ];
 }
 
