@@ -148,6 +148,9 @@ h1 {
   min-height: 0;
   overflow: hidden;
   cursor: grab;
+  touch-action: none;
+  overscroll-behavior: contain;
+  user-select: none;
   background:
     linear-gradient(90deg, rgba(30, 72, 110, 0.05) 1px, transparent 1px),
     linear-gradient(rgba(30, 72, 110, 0.05) 1px, transparent 1px),

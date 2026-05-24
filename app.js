@@ -1,6 +1,8 @@
 const MAP_WIDTH = 1200;
 const MAP_HEIGHT = 900;
 const MAP_PADDING = 34;
+const MIN_SCALE = 0.18;
+const MAX_SCALE = 3.2;
 
 const state = {
   data: null,
@@ -12,6 +14,9 @@ const state = {
   transform: { x: 0, y: 0, scale: 1 },
   dragging: false,
   dragStart: null,
+  activePointers: new Map(),
+  gestureStart: null,
+  userAdjustedView: false,
 };
 
 const els = {
@@ -164,30 +169,33 @@ function storeMarkup(store) {
   `;
 }
 
-function setTransform(next = state.transform) {
+function setTransform(next = state.transform, options = {}) {
   state.transform = next;
+  if (options.userAdjusted) state.userAdjustedView = true;
   els.plane.style.transform = `translate(${next.x}px, ${next.y}px) scale(${next.scale})`;
   els.zoomRange.value = String(next.scale);
 }
 
-function fitMap() {
+function fitMap(options = {}) {
   const rect = els.viewport.getBoundingClientRect();
+  if (state.userAdjustedView && !options.force) return;
   const scale = Math.min(rect.width / MAP_WIDTH, rect.height / MAP_HEIGHT) * 0.98;
   const x = (rect.width - MAP_WIDTH * scale) / 2;
   const y = (rect.height - MAP_HEIGHT * scale) / 2;
+  if (options.force) state.userAdjustedView = false;
   setTransform({ x, y, scale });
 }
 
-function zoomTo(scale, anchorX = els.viewport.clientWidth / 2, anchorY = els.viewport.clientHeight / 2) {
+function zoomTo(scale, anchorX = els.viewport.clientWidth / 2, anchorY = els.viewport.clientHeight / 2, options = {}) {
   const current = state.transform;
-  const nextScale = Math.min(2.3, Math.max(0.42, scale));
+  const nextScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, scale));
   const mapX = (anchorX - current.x) / current.scale;
   const mapY = (anchorY - current.y) / current.scale;
   setTransform({
     scale: nextScale,
     x: anchorX - mapX * nextScale,
     y: anchorY - mapY * nextScale,
-  });
+  }, { userAdjusted: options.userAdjusted !== false });
 }
 
 function matchesStore(store, query) {
@@ -369,42 +377,104 @@ function bindMapInteractions() {
     zoomTo(scale, event.clientX - rect.left, event.clientY - rect.top);
   }, { passive: false });
 
+  els.viewport.addEventListener("gesturestart", (event) => event.preventDefault(), { passive: false });
+  els.viewport.addEventListener("gesturechange", (event) => event.preventDefault(), { passive: false });
+
   els.viewport.addEventListener("pointerdown", (event) => {
     if (event.target.closest(".pin")) return;
-    state.dragging = true;
-    state.dragStart = {
-      pointerId: event.pointerId,
-      x: event.clientX,
-      y: event.clientY,
-      startX: state.transform.x,
-      startY: state.transform.y,
-    };
-    els.viewport.setPointerCapture(event.pointerId);
+    event.preventDefault();
+    state.activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    try {
+      els.viewport.setPointerCapture(event.pointerId);
+    } catch {
+      // Synthetic pointer events in tests may not be capturable.
+    }
+    state.userAdjustedView = true;
     els.viewport.classList.add("dragging");
+    updateGestureStart();
   });
 
   els.viewport.addEventListener("pointermove", (event) => {
-    if (!state.dragging || !state.dragStart) return;
-    const dx = event.clientX - state.dragStart.x;
-    const dy = event.clientY - state.dragStart.y;
-    setTransform({
-      ...state.transform,
-      x: state.dragStart.startX + dx,
-      y: state.dragStart.startY + dy,
-    });
+    if (!state.activePointers.has(event.pointerId)) return;
+    event.preventDefault();
+    state.activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+
+    const pointers = [...state.activePointers.values()];
+    if (pointers.length === 1 && state.gestureStart?.type === "pan") {
+      const pointer = pointers[0];
+      const dx = pointer.x - state.gestureStart.x;
+      const dy = pointer.y - state.gestureStart.y;
+      setTransform({
+        ...state.gestureStart.transform,
+        x: state.gestureStart.transform.x + dx,
+        y: state.gestureStart.transform.y + dy,
+      }, { userAdjusted: true });
+      return;
+    }
+
+    if (pointers.length >= 2 && state.gestureStart?.type === "pinch") {
+      const [a, b] = pointers;
+      const center = midpoint(a, b);
+      const distance = pointerDistance(a, b);
+      const nextScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, state.gestureStart.transform.scale * (distance / state.gestureStart.distance)));
+      const mapX = (state.gestureStart.center.x - state.gestureStart.transform.x) / state.gestureStart.transform.scale;
+      const mapY = (state.gestureStart.center.y - state.gestureStart.transform.y) / state.gestureStart.transform.scale;
+      setTransform({
+        scale: nextScale,
+        x: center.x - mapX * nextScale,
+        y: center.y - mapY * nextScale,
+      }, { userAdjusted: true });
+    }
   });
 
-  els.viewport.addEventListener("pointerup", () => {
-    state.dragging = false;
-    state.dragStart = null;
-    els.viewport.classList.remove("dragging");
+  els.viewport.addEventListener("pointerup", (event) => {
+    state.activePointers.delete(event.pointerId);
+    updateGestureStart();
   });
 
-  els.viewport.addEventListener("pointercancel", () => {
-    state.dragging = false;
-    state.dragStart = null;
-    els.viewport.classList.remove("dragging");
+  els.viewport.addEventListener("pointercancel", (event) => {
+    state.activePointers.delete(event.pointerId);
+    updateGestureStart();
   });
+}
+
+function pointerDistance(a, b) {
+  return Math.hypot(a.x - b.x, a.y - b.y);
+}
+
+function midpoint(a, b) {
+  return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+}
+
+function updateGestureStart() {
+  const pointers = [...state.activePointers.values()];
+  if (!pointers.length) {
+    state.dragging = false;
+    state.gestureStart = null;
+    els.viewport.classList.remove("dragging");
+    return;
+  }
+
+  state.dragging = true;
+  els.viewport.classList.add("dragging");
+
+  if (pointers.length === 1) {
+    state.gestureStart = {
+      type: "pan",
+      x: pointers[0].x,
+      y: pointers[0].y,
+      transform: { ...state.transform },
+    };
+    return;
+  }
+
+  const [a, b] = pointers;
+  state.gestureStart = {
+    type: "pinch",
+    center: midpoint(a, b),
+    distance: pointerDistance(a, b),
+    transform: { ...state.transform },
+  };
 }
 
 function bindControls() {
@@ -414,7 +484,7 @@ function bindControls() {
   els.zoomRange.addEventListener("input", () => zoomTo(Number(els.zoomRange.value)));
   els.zoomIn.addEventListener("click", () => zoomTo(state.transform.scale * 1.14));
   els.zoomOut.addEventListener("click", () => zoomTo(state.transform.scale / 1.14));
-  els.resetView.addEventListener("click", fitMap);
+  els.resetView.addEventListener("click", () => fitMap({ force: true }));
   window.addEventListener("resize", fitMap);
 }
 
