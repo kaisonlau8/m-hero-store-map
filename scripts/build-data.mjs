@@ -1,8 +1,19 @@
-import { FileBlob, SpreadsheetFile } from "@oai/artifact-tool";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { createRequire } from "node:module";
 
-const sourceXlsx = "/Users/i/Library/CloudStorage/OneDrive-个人/工作相关/猛士科技（襄阳）有限公司/服务运营/渠道/猛士售后门店清单20260524.xlsx";
+const require = createRequire(import.meta.url);
+const runtimeRequire = createRequire("/Users/i/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/");
+const { FileBlob, SpreadsheetFile } = (() => {
+  try {
+    return require("@oai/artifact-tool");
+  } catch {
+    return runtimeRequire("@oai/artifact-tool");
+  }
+})();
+
+const channelDir = "/Users/i/Library/CloudStorage/OneDrive-个人/工作相关/猛士科技（襄阳）有限公司/服务运营/渠道";
+const sourceXlsx = await resolveSourceWorkbook();
 const outputDir = new URL("../assets/", import.meta.url);
 const dataPath = new URL("stores.json", outputDir);
 
@@ -49,6 +60,31 @@ function clean(value) {
   return String(value ?? "").trim();
 }
 
+async function resolveSourceWorkbook() {
+  const explicitPath = process.argv[2] || process.env.STORE_MAP_XLSX;
+  if (explicitPath) return path.resolve(explicitPath);
+
+  const entries = await fs.readdir(channelDir, { withFileTypes: true });
+  const candidates = await Promise.all(
+    entries
+      .filter((entry) => entry.isFile())
+      .filter((entry) => /^猛士售后门店清单\d{8}\.xlsx$/.test(entry.name))
+      .map(async (entry) => {
+        const fullPath = path.join(channelDir, entry.name);
+        const dateMatch = entry.name.match(/(\d{8})/);
+        const stat = await fs.stat(fullPath);
+        return { fullPath, dateKey: dateMatch?.[1] ?? "", mtimeMs: stat.mtimeMs };
+      }),
+  );
+
+  if (!candidates.length) {
+    throw new Error(`No workbook matched 猛士售后门店清单YYYYMMDD.xlsx in ${channelDir}`);
+  }
+
+  candidates.sort((a, b) => b.dateKey.localeCompare(a.dateKey) || b.mtimeMs - a.mtimeMs);
+  return candidates[0].fullPath;
+}
+
 function provinceForMap(name) {
   return provinceNameFix.get(clean(name)) || clean(name);
 }
@@ -91,7 +127,6 @@ const cityCenters = await buildCityCenters();
 const configs = [
   {
     sheet: "一网",
-    range: "A1:L122",
     network: "一网",
     mapRow(row) {
       return {
@@ -112,7 +147,6 @@ const configs = [
   },
   {
     sheet: "二网",
-    range: "A1:H34",
     network: "二网",
     mapRow(row) {
       return {
@@ -137,9 +171,13 @@ const stores = [];
 const missing = [];
 
 for (const config of configs) {
-  const values = workbook.worksheets.getItem(config.sheet).getRange(config.range).values;
+  const sheet = workbook.worksheets.getItem(config.sheet);
+  const range = sheet.getUsedRange()?.address;
+  if (!range) throw new Error(`Sheet ${config.sheet} has no used range.`);
+  const values = sheet.getRange(range).values;
   for (let i = 1; i < values.length; i += 1) {
     const store = { id: `${config.network}-${i}`, network: config.network, ...config.mapRow(values[i]) };
+    if (!store.code || !store.name) continue;
     const correction = storeAreaCorrections.get(store.code);
     if (correction) Object.assign(store, correction);
     const center = cityCenters.get(store.city) || cityCenters.get(provinceForMap(store.province));

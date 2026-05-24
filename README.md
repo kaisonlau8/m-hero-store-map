@@ -12,13 +12,77 @@ python3 -m http.server 4173
 
 ## 更新数据
 
-如需重新从 Excel 生成数据：
+后续门店有增删改时，只需要更新 Excel，再重新生成 `assets/stores.json` 并推送到 GitHub。
+
+默认读取目录：
+
+```text
+/Users/i/Library/CloudStorage/OneDrive-个人/工作相关/猛士科技（襄阳）有限公司/服务运营/渠道
+```
+
+默认匹配文件名：
+
+```text
+猛士售后门店清单YYYYMMDD.xlsx
+```
+
+脚本会自动选择日期最新的清单文件。例如目录里同时有 `猛士售后门店清单20260524.xlsx` 和 `猛士售后门店清单20260601.xlsx`，会自动读取 `20260601` 这份。
+
+### 日常更新流程
+
+1. 把新的门店清单 Excel 放进上面的“渠道”目录。
+2. 文件名保持 `猛士售后门店清单YYYYMMDD.xlsx` 格式。
+3. 回到本项目目录：
+
+```bash
+cd /Users/i/myCode/service-network-map
+```
+
+4. 生成最新地图数据：
 
 ```bash
 /Users/i/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/build-data.mjs
 ```
 
-生成结果会写入 `assets/stores.json`。
+5. 本地预览确认：
+
+```bash
+python3 -m http.server 4173
+```
+
+打开 `http://localhost:4173/`，确认点位、搜索、筛选正常。
+
+6. 提交并推送：
+
+```bash
+git add assets/stores.json
+git commit -m "Update store map data"
+git push
+```
+
+GitHub Pages 会自动更新线上页面。
+
+### 指定某个 Excel 文件
+
+如果不想自动读取最新文件，也可以显式指定：
+
+```bash
+/Users/i/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/build-data.mjs "/完整路径/猛士售后门店清单20260601.xlsx"
+```
+
+也可以用环境变量：
+
+```bash
+STORE_MAP_XLSX="/完整路径/猛士售后门店清单20260601.xlsx" /Users/i/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node scripts/build-data.mjs
+```
+
+### 数据注意事项
+
+- 一网、二网工作表名称需要保持为 `一网`、`二网`。
+- 表头列名和现有模板保持一致即可，新增或删除门店行后不需要改脚本。
+- 脚本按城市中心点定位。同城多店会在页面中轻微散开，避免大头钉完全重叠。
+- 如果 Excel 里省市区填反或城市无法识别，脚本会在输出里列出 `missing`。先修 Excel，再重新运行脚本。
+- 当前脚本内保留了两条历史修正：`MSFWWD099` 成都授权服务中心、`MSFWWD098` 林芝授权服务中心，用来修复原始表里成都/林芝省市区互填的问题。
 
 ## GitHub Pages
 
