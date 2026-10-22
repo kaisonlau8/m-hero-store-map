@@ -153,18 +153,21 @@ function htmlEscape(value) {
 
 function storeMarkup(store) {
   const network = networkClass(store);
-  const address = store.address || `${store.province}${store.city}${store.district}`;
+  const place = [store.province, store.city, store.district].filter(Boolean).join(" ");
+  const address = store.address && store.address !== place ? store.address : "";
   const tags = [
     `<span class="badge ${network}">${store.network}</span>`,
     store.region ? `<span class="badge neutral">${htmlEscape(store.region)}</span>` : "",
     store.functionType ? `<span class="badge neutral">${htmlEscape(store.functionType)}</span>` : "",
+    store.level ? `<span class="badge neutral">${htmlEscape(store.level)}</span>` : "",
   ].join("");
 
   return `
     <h3>${htmlEscape(store.name)}</h3>
     <div class="meta">${tags}</div>
-    <div class="info-line">${htmlEscape(store.province)} ${htmlEscape(store.city)} ${htmlEscape(store.district)}</div>
-    <div class="info-line">${htmlEscape(address)}</div>
+    <div class="info-line">${htmlEscape(place)}</div>
+    ${store.fullName ? `<div class="info-line">${htmlEscape(store.fullName)}</div>` : ""}
+    ${address ? `<div class="info-line">${htmlEscape(address)}</div>` : ""}
     <div class="info-line">${htmlEscape(store.code)}${store.rating ? ` · ${htmlEscape(store.rating)}` : ""}${store.status ? ` · ${htmlEscape(store.status)}` : ""}</div>
   `;
 }
@@ -202,6 +205,7 @@ function matchesStore(store, query) {
   if (!query) return true;
   const haystack = [
     store.name,
+    store.fullName,
     store.code,
     store.region,
     store.province,

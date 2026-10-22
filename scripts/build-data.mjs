@@ -65,6 +65,14 @@ async function resolveSourceWorkbook() {
   const explicitPath = process.argv[2] || process.env.STORE_MAP_XLSX;
   if (explicitPath) return path.resolve(explicitPath);
 
+  const preferred = path.join(sourceDir.pathname, "售后网点省市覆盖.xlsx");
+  try {
+    await fs.access(preferred);
+    return preferred;
+  } catch {
+    // Fall back to the older dated store list when the coverage workbook is absent.
+  }
+
   const entries = await fs.readdir(sourceDir, { withFileTypes: true });
   const candidates = await Promise.all(
     entries
@@ -125,71 +133,146 @@ async function buildCityCenters() {
 
 const workbook = await SpreadsheetFile.importXlsx(await FileBlob.load(sourceXlsx));
 const cityCenters = await buildCityCenters();
-const configs = [
-  {
-    sheet: "一网",
-    network: "一网",
-    mapRow(row) {
-      return {
-        sequence: row[0],
-        code: clean(row[1]),
-        region: clean(row[2]),
-        name: clean(row[3]),
-        province: clean(row[4]),
-        city: clean(row[5]),
-        district: clean(row[6]),
-        address: clean(row[7]),
-        storeType: clean(row[8]),
-        functionType: clean(row[9]),
-        rating: clean(row[10]),
-        status: clean(row[11]),
-      };
+const sheets = new Map(workbook.worksheets.items.map((sheet) => [sheet.name, sheet]));
+
+function sheetRows(sheetName) {
+  const sheet = sheets.get(sheetName);
+  if (!sheet) return null;
+  const range = sheet.getUsedRange()?.address;
+  if (!range) throw new Error(`Sheet ${sheetName} has no used range.`);
+  return sheet.getRange(range).values;
+}
+
+function headerIndex(header) {
+  const index = new Map();
+  header.forEach((cell, position) => {
+    const key = clean(cell);
+    if (key) index.set(key, position);
+  });
+  return index;
+}
+
+function cell(row, index, name) {
+  const position = index.get(name);
+  return position == null ? "" : clean(row[position]);
+}
+
+function legacyStores() {
+  const configs = [
+    {
+      sheet: "一网",
+      network: "一网",
+      mapRow(row) {
+        return {
+          sequence: row[0],
+          code: clean(row[1]),
+          region: clean(row[2]),
+          name: clean(row[3]),
+          fullName: "",
+          province: clean(row[4]),
+          city: clean(row[5]),
+          district: clean(row[6]),
+          address: clean(row[7]),
+          level: "",
+          storeType: clean(row[8]),
+          functionType: clean(row[9]),
+          rating: clean(row[10]),
+          status: clean(row[11]),
+        };
+      },
     },
-  },
-  {
-    sheet: "二网",
-    network: "二网",
-    mapRow(row) {
-      return {
-        sequence: row[0],
-        code: clean(row[1]),
-        region: "",
-        name: clean(row[2]),
-        province: clean(row[5]),
-        city: clean(row[6]),
-        district: clean(row[7]),
-        address: `${clean(row[5])}${clean(row[6])}${clean(row[7])}`,
-        storeType: clean(row[4]),
-        functionType: clean(row[3]),
-        rating: "",
-        status: "",
-      };
+    {
+      sheet: "二网",
+      network: "二网",
+      mapRow(row) {
+        return {
+          sequence: row[0],
+          code: clean(row[1]),
+          region: "",
+          name: clean(row[2]),
+          fullName: "",
+          province: clean(row[5]),
+          city: clean(row[6]),
+          district: clean(row[7]),
+          address: `${clean(row[5])}${clean(row[6])}${clean(row[7])}`,
+          level: "",
+          storeType: clean(row[4]),
+          functionType: clean(row[3]),
+          rating: "",
+          status: "",
+        };
+      },
     },
-  },
-];
+  ];
+
+  const rows = [];
+  for (const config of configs) {
+    const values = sheetRows(config.sheet);
+    if (!values) throw new Error(`Workbook is missing sheet ${config.sheet}.`);
+    for (let i = 1; i < values.length; i += 1) {
+      const store = { id: `${config.network}-${i}`, network: config.network, sheet: config.sheet, row: i + 1, ...config.mapRow(values[i]) };
+      const correction = storeAreaCorrections.get(store.code);
+      if (correction) Object.assign(store, correction);
+      rows.push(store);
+    }
+  }
+  return rows;
+}
+
+function coverageStores() {
+  const values = sheetRows("门店明细");
+  const index = headerIndex(values[0] ?? []);
+  for (const name of ["网络", "门店编码", "门店名称", "省份", "城市"]) {
+    if (!index.has(name)) throw new Error(`Sheet 门店明细 is missing column ${name}.`);
+  }
+
+  const sequenceByNetwork = new Map();
+  const rows = [];
+  for (let i = 1; i < values.length; i += 1) {
+    const row = values[i];
+    const network = cell(row, index, "网络");
+    const sequence = (sequenceByNetwork.get(network) ?? 0) + 1;
+    sequenceByNetwork.set(network, sequence);
+    rows.push({
+      id: `${network}-${sequence}`,
+      network,
+      sheet: "门店明细",
+      row: i + 1,
+      sequence,
+      code: cell(row, index, "门店编码"),
+      region: "",
+      name: cell(row, index, "门店名称"),
+      fullName: cell(row, index, "门店全称"),
+      province: cell(row, index, "省份"),
+      city: cell(row, index, "城市"),
+      district: cell(row, index, "区县"),
+      address: "",
+      level: cell(row, index, "层级"),
+      storeType: "",
+      functionType: "",
+      rating: "",
+      status: "",
+    });
+  }
+  return rows;
+}
 
 const stores = [];
 const missing = [];
+const sourceRows = sheets.has("门店明细") ? coverageStores() : legacyStores();
 
-for (const config of configs) {
-  const sheet = workbook.worksheets.getItem(config.sheet);
-  const range = sheet.getUsedRange()?.address;
-  if (!range) throw new Error(`Sheet ${config.sheet} has no used range.`);
-  const values = sheet.getRange(range).values;
-  for (let i = 1; i < values.length; i += 1) {
-    const store = { id: `${config.network}-${i}`, network: config.network, ...config.mapRow(values[i]) };
-    if (!store.code || !store.name) continue;
-    const correction = storeAreaCorrections.get(store.code);
-    if (correction) Object.assign(store, correction);
-    const center = cityCenters.get(store.city) || cityCenters.get(provinceForMap(store.province));
-    if (!center) {
-      missing.push({ sheet: config.sheet, row: i + 1, name: store.name, province: store.province, city: store.city });
-      continue;
-    }
-    store.lng = center[0];
-    store.lat = center[1];
-    stores.push(store);
+for (const store of sourceRows) {
+  if (!store.code || !store.name) continue;
+  const center = cityCenters.get(store.city) || cityCenters.get(provinceForMap(store.province));
+  if (!center) {
+    missing.push({ sheet: store.sheet, row: store.row, name: store.name, province: store.province, city: store.city });
+    continue;
   }
+  delete store.sheet;
+  delete store.row;
+  store.lng = center[0];
+  store.lat = center[1];
+  stores.push(store);
 }
 
 const summary = {
