@@ -1,0 +1,34 @@
+{
+  "sourceTime": "2026-11-19T10:59:42+08:00",
+  "counts": {
+    "total": 171,
+    "firstNetwork": 114,
+    "secondNetwork": 57
+  },
+  "errors": [],
+  "warnings": [],
+  "anomalies": [
+    {
+      "recordId": "recvxweDzu9YxV",
+      "code": "MSFWWD114",
+      "originalName": "猛士东方授权服务中心",
+      "province": "海南省",
+      "city": "东方市",
+      "district": "东方市",
+      "name": "猛士授权店（行政区待核）",
+      "anomalyNote": "区字段与市重复（东方市），未编造区名",
+      "address": ""
+    },
+    {
+      "recordId": "reczz28WDhQnIw6r",
+      "code": "MSFWWD131",
+      "originalName": "猛士大连授权服务中心（进店时请预约）",
+      "province": "辽宁省",
+      "city": "大连市",
+      "district": "大连市",
+      "name": "猛士授权店（行政区待核）",
+      "anomalyNote": "区字段与市重复（大连市），未编造区名",
+      "address": ""
+    }
+  ]
+}
