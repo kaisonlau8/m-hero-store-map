@@ -100,6 +100,7 @@ export function normalizeSnapshot(snapshot, { levels = new Map() } = {}) {
       nameStatus,
       anomalyCode,
       anomalyNote,
+      dataSource: "飞书快照",
     });
   });
 

@@ -13,17 +13,19 @@ const workbook = await readCoverageWorkbook(new URL("../data/source/售后网点
 const contactPattern = /1[3-9]\d{9}|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/;
 
 test("发布的地图与 Excel 一致，且不含电话或邮箱", () => {
-  assert.equal(map.counts.total, 171);
+  assert.equal(map.counts.total, 186);
   assert.equal(map.counts.firstNetwork, 114);
-  assert.equal(map.counts.secondNetwork, 57);
-  assert.equal(map.stores.length, 171);
-  assert.equal(workbook.stores.length, 171);
-  assert.equal(workbook.summary.total, 171);
+  assert.equal(map.counts.secondNetwork, 72);
+  assert.equal(map.stores.length, 186);
+  assert.equal(workbook.stores.length, 186);
+  assert.equal(workbook.summary.total, 186);
   assert.equal(workbook.summary.firstNetwork, 114);
-  assert.equal(workbook.summary.secondNetwork, 57);
-  assert.equal(new Set(map.stores.map((store) => store.recordId)).size, 171);
-  assert.equal(new Set(map.stores.map((store) => store.id)).size, 171);
-  assert.equal(new Set(map.stores.map((store) => store.code)).size, 171);
+  assert.equal(workbook.summary.secondNetwork, 72);
+  assert.equal(new Set(map.stores.map((store) => store.recordId)).size, 186);
+  assert.equal(new Set(map.stores.map((store) => store.id)).size, 186);
+  assert.equal(new Set(map.stores.map((store) => store.code).filter(Boolean)).size, 171);
+  assert.equal(map.stores.filter((store) => store.code === "").length, 15);
+  assert.equal(map.sourceNote.includes("用户手工新增"), true);
   assert.equal(map.generatedAt, "2026-11-19T11:45:35+08:00");
   assert.equal(map.sourceNote.includes("只更新 3 条二网"), true);
   assert.equal(map.sourceNote.includes("不是本次全表新读"), true);

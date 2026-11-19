@@ -9,13 +9,13 @@
   "mapGeoJson": "china.geojson",
   "coordinateLevel": "city-center",
   "coordinateNote": "点位使用城市行政中心，同城门店只做防重叠散开，不是门店精确坐标。",
-  "sourceNote": "纠正时间 2026-11-19 11:45:35 UTC+08:00。只更新 3 条二网（MSFWWD098、MSFWWD129、MSFWWD128）。一网仍为 2026-11-19 10:59:42 UTC+08:00 的有售后视图，修订号 147，不是本次全表新读。",
+  "sourceNote": "纠正时间 2026-11-19 11:45:35 UTC+08:00。只更新 3 条二网（MSFWWD098、MSFWWD129、MSFWWD128）。一网仍为 2026-11-19 10:59:42 UTC+08:00 的有售后视图，修订号 147，不是本次全表新读。15 条二网为用户手工新增，未同步飞书，无飞书 record_id 与门店编码。",
   "counts": {
-    "total": 171,
+    "total": 186,
     "firstNetwork": 114,
-    "secondNetwork": 57,
+    "secondNetwork": 72,
     "provinces": 31,
-    "cities": 146
+    "cities": 160
   },
   "anomalies": [
     {
@@ -63,6 +63,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 120.355173,
       "lat": 36.082982
@@ -90,6 +91,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 114.298572,
       "lat": 30.584355
@@ -117,6 +119,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 118.11022,
       "lat": 24.490474
@@ -144,6 +147,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 106.504962,
       "lat": 29.533155
@@ -171,6 +175,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 114.085947,
       "lat": 22.547
@@ -198,6 +203,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 117.190182,
       "lat": 39.125596
@@ -225,6 +231,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 121.428599,
       "lat": 28.661378
@@ -252,6 +259,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 116.405285,
       "lat": 39.904989
@@ -279,6 +287,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 113.122717,
       "lat": 23.028762
@@ -306,6 +315,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 113.665412,
       "lat": 34.757975
@@ -333,6 +343,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 110.33119,
       "lat": 20.031971
@@ -360,6 +371,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 108.948024,
       "lat": 34.263161
@@ -387,6 +399,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 120.153576,
       "lat": 30.287459
@@ -414,6 +427,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 102.712251,
       "lat": 25.040609
@@ -441,6 +455,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 108.320004,
       "lat": 22.82402
@@ -468,6 +483,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 121.549792,
       "lat": 29.868388
@@ -495,6 +511,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 113.280637,
       "lat": 23.125178
@@ -522,6 +539,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 112.982279,
       "lat": 28.19409
@@ -549,6 +567,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 120.864608,
       "lat": 32.016212
@@ -576,6 +595,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 125.3245,
       "lat": 43.886841
@@ -603,6 +623,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 120.619585,
       "lat": 31.299379
@@ -630,6 +651,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 106.278179,
       "lat": 38.46637
@@ -657,6 +679,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 120.672111,
       "lat": 28.000575
@@ -684,6 +707,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 109.99029,
       "lat": 39.817179
@@ -711,6 +735,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 103.823557,
       "lat": 36.058039
@@ -738,6 +763,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 87.617733,
       "lat": 43.792818
@@ -765,6 +791,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 113.746262,
       "lat": 23.046237
@@ -792,6 +819,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 121.472644,
       "lat": 31.231706
@@ -819,6 +847,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 118.767413,
       "lat": 32.041544
@@ -846,6 +875,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 114.412599,
       "lat": 23.079404
@@ -873,6 +903,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 116.857461,
       "lat": 38.310582
@@ -900,6 +931,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 102.258746,
       "lat": 27.886762
@@ -927,6 +959,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 110.787916,
       "lat": 32.646907
@@ -954,6 +987,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 113.665412,
       "lat": 34.757975
@@ -981,6 +1015,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 119.306239,
       "lat": 26.075302
@@ -1008,6 +1043,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 126.642464,
       "lat": 45.756967
@@ -1035,6 +1071,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 118.589421,
       "lat": 24.908853
@@ -1062,6 +1099,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 106.713478,
       "lat": 26.578343
@@ -1089,6 +1127,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 104.630825,
       "lat": 28.760189
@@ -1116,6 +1155,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 121.472644,
       "lat": 31.231706
@@ -1143,6 +1183,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 109.97824,
       "lat": 27.550082
@@ -1170,6 +1211,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 117.043551,
       "lat": 30.50883
@@ -1197,6 +1239,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 115.469381,
       "lat": 35.246531
@@ -1224,6 +1267,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 113.280637,
       "lat": 23.125178
@@ -1251,6 +1295,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 113.883991,
       "lat": 35.302616
@@ -1278,6 +1323,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 115.819729,
       "lat": 32.896969
@@ -1305,6 +1351,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 117.283042,
       "lat": 31.86119
@@ -1332,6 +1379,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 113.295259,
       "lat": 40.09031
@@ -1359,6 +1407,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 112.434468,
       "lat": 34.663041
@@ -1386,6 +1435,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 112.549248,
       "lat": 37.857014
@@ -1413,6 +1463,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 113.746262,
       "lat": 23.046237
@@ -1440,6 +1491,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 108.948024,
       "lat": 34.263161
@@ -1467,6 +1519,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 113.122717,
       "lat": 23.028762
@@ -1494,6 +1547,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 116.507676,
       "lat": 31.752889
@@ -1521,6 +1575,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 117.184811,
       "lat": 34.261792
@@ -1548,6 +1603,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 119.107078,
       "lat": 36.70925
@@ -1575,6 +1631,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 114.490686,
       "lat": 36.612273
@@ -1602,6 +1659,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 118.047648,
       "lat": 36.814939
@@ -1629,6 +1687,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 101.778916,
       "lat": 36.623178
@@ -1656,6 +1715,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 119.946973,
       "lat": 31.772752
@@ -1683,6 +1743,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 117.971185,
       "lat": 28.44442
@@ -1710,6 +1771,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 118.956806,
       "lat": 42.275317
@@ -1737,6 +1799,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 118.326443,
       "lat": 35.065282
@@ -1764,6 +1827,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 111.670801,
       "lat": 40.818311
@@ -1791,6 +1855,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 109.840405,
       "lat": 40.658168
@@ -1818,6 +1883,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 113.382391,
       "lat": 22.521113
@@ -1845,6 +1911,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 114.502461,
       "lat": 38.045474
@@ -1872,6 +1939,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 115.980367,
       "lat": 36.456013
@@ -1899,6 +1967,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 104.065735,
       "lat": 30.659462
@@ -1926,6 +1995,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 103.831788,
       "lat": 30.048318
@@ -1953,6 +2023,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 105.443348,
       "lat": 28.889138
@@ -1980,6 +2051,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 101.716007,
       "lat": 26.580446
@@ -2007,6 +2079,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 106.937265,
       "lat": 27.706626
@@ -2034,6 +2107,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 104.741722,
       "lat": 31.46402
@@ -2061,6 +2135,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 106.082974,
       "lat": 30.795281
@@ -2088,6 +2163,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 111.290843,
       "lat": 30.702636
@@ -2115,6 +2191,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 116.405285,
       "lat": 39.904989
@@ -2142,6 +2219,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 106.713478,
       "lat": 26.578343
@@ -2169,6 +2247,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 112.144146,
       "lat": 32.042426
@@ -2196,6 +2275,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 113.113556,
       "lat": 36.191112
@@ -2223,6 +2303,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 115.482331,
       "lat": 38.867657
@@ -2250,6 +2331,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 119.649506,
       "lat": 29.089524
@@ -2277,6 +2359,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 121.549792,
       "lat": 29.868388
@@ -2304,6 +2387,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 113.665412,
       "lat": 34.757975
@@ -2331,6 +2415,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 121.391382,
       "lat": 37.539297
@@ -2358,6 +2443,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 120.102398,
       "lat": 30.867198
@@ -2385,6 +2471,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 120.355173,
       "lat": 36.082982
@@ -2412,6 +2499,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 114.502461,
       "lat": 38.045474
@@ -2439,6 +2527,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 122.116394,
       "lat": 37.509691
@@ -2466,6 +2555,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 107.14487,
       "lat": 34.369315
@@ -2493,6 +2583,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 116.117582,
       "lat": 24.299112
@@ -2520,6 +2611,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 119.758168,
       "lat": 49.215333
@@ -2547,6 +2639,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 117.000923,
       "lat": 36.675807
@@ -2574,6 +2667,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 112.851274,
       "lat": 35.497553
@@ -2601,6 +2695,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 109.741193,
       "lat": 38.290162
@@ -2628,6 +2723,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 122.263119,
       "lat": 43.617429
@@ -2655,6 +2751,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 103.761263,
       "lat": 29.582024
@@ -2682,6 +2779,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 87.617733,
       "lat": 43.792818
@@ -2709,6 +2807,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 116.704441,
       "lat": 39.523927
@@ -2736,6 +2835,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 106.504962,
       "lat": 29.533155
@@ -2763,6 +2863,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 123.429096,
       "lat": 41.796767
@@ -2790,6 +2891,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 108.948024,
       "lat": 34.263161
@@ -2817,6 +2919,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 116.708463,
       "lat": 23.37102
@@ -2844,6 +2947,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 114.298572,
       "lat": 30.584355
@@ -2871,6 +2975,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 115.892151,
       "lat": 28.676493
@@ -2898,6 +3003,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 120.153576,
       "lat": 30.287459
@@ -2925,6 +3031,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 112.982279,
       "lat": 28.19409
@@ -2952,6 +3059,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 117.283042,
       "lat": 31.86119
@@ -2979,6 +3087,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 119.649506,
       "lat": 29.089524
@@ -3006,6 +3115,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 114.298572,
       "lat": 30.584355
@@ -3033,6 +3143,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 120.301663,
       "lat": 31.574729
@@ -3060,6 +3171,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 125.3245,
       "lat": 43.886841
@@ -3087,6 +3199,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 104.065735,
       "lat": 30.659462
@@ -3114,6 +3227,7 @@
       "nameStatus": "沿用原名",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 104.065735,
       "lat": 30.659462
@@ -3141,6 +3255,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 115.892151,
       "lat": 28.676493
@@ -3168,6 +3283,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 100.225668,
       "lat": 25.589449
@@ -3195,6 +3311,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 120.139998,
       "lat": 33.377631
@@ -3222,6 +3339,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 110.364977,
       "lat": 21.274898
@@ -3249,6 +3367,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 109.48699,
       "lat": 30.283114
@@ -3276,6 +3395,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 91.132212,
       "lat": 29.660361
@@ -3303,6 +3423,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 107.638372,
       "lat": 35.734218
@@ -3330,6 +3451,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 98.510795,
       "lat": 39.744023
@@ -3357,6 +3479,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 109.508268,
       "lat": 18.247872
@@ -3384,6 +3507,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 112.607693,
       "lat": 26.900358
@@ -3411,6 +3535,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 100.797941,
       "lat": 22.001724
@@ -3438,6 +3563,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 114.341447,
       "lat": 34.797049
@@ -3465,6 +3591,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 114.295444,
       "lat": 35.748236
@@ -3492,6 +3619,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 114.352482,
       "lat": 36.103442
@@ -3519,6 +3647,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 115.041299,
       "lat": 35.768234
@@ -3546,6 +3675,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 114.024736,
       "lat": 32.980169
@@ -3573,6 +3703,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 114.026405,
       "lat": 33.575855
@@ -3600,6 +3731,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 113.307718,
       "lat": 33.735241
@@ -3627,6 +3759,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 113.826063,
       "lat": 34.022956
@@ -3654,6 +3787,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 115.650497,
       "lat": 34.437054
@@ -3681,6 +3815,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 119.915176,
       "lat": 32.484882
@@ -3708,6 +3843,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 124.823608,
       "lat": 45.118243
@@ -3735,6 +3871,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 94.362348,
       "lat": 29.654693
@@ -3762,6 +3899,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 113.926655,
       "lat": 30.926423
@@ -3789,6 +3927,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 119.527082,
       "lat": 26.65924
@@ -3816,6 +3955,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 118.376451,
       "lat": 31.326319
@@ -3843,6 +3983,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 109.49081,
       "lat": 36.596537
@@ -3870,6 +4011,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 118.757995,
       "lat": 30.945667
@@ -3897,6 +4039,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 109.191555,
       "lat": 27.718346
@@ -3924,6 +4067,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 107.977488,
       "lat": 26.583352
@@ -3951,6 +4095,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 109.502882,
       "lat": 34.499381
@@ -3978,6 +4123,7 @@
       "nameStatus": "行政区待核",
       "anomalyCode": "district-equals-city",
       "anomalyNote": "区字段与市重复（东方市），未编造区名",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 108.653789,
       "lat": 19.10198
@@ -4005,6 +4151,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 119.021265,
       "lat": 33.597506
@@ -4032,6 +4179,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 105.724998,
       "lat": 34.578529
@@ -4059,6 +4207,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 105.28501,
       "lat": 27.301693
@@ -4086,6 +4235,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 104.846743,
       "lat": 26.584643
@@ -4113,6 +4263,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 119.421003,
       "lat": 32.393159
@@ -4140,6 +4291,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 104.24401,
       "lat": 23.36951
@@ -4167,6 +4319,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 103.384182,
       "lat": 23.366775
@@ -4194,6 +4347,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 112.733538,
       "lat": 38.41769
@@ -4221,6 +4375,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 119.452753,
       "lat": 32.204402
@@ -4248,6 +4403,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 112.736465,
       "lat": 37.696495
@@ -4275,6 +4431,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 102.543907,
       "lat": 24.350461
@@ -4302,6 +4459,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 110.919229,
       "lat": 21.659751
@@ -4329,6 +4487,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 126.99293,
       "lat": 46.637393
@@ -4356,6 +4515,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 109.576782,
       "lat": 19.517486
@@ -4383,6 +4543,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 93.51316,
       "lat": 42.833248
@@ -4410,6 +4571,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 87.824932,
       "lat": 47.353177
@@ -4437,6 +4599,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 86.041075,
       "lat": 44.305886
@@ -4464,6 +4627,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 84.873946,
       "lat": 45.595886
@@ -4491,6 +4655,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 75.989138,
       "lat": 39.467664
@@ -4518,6 +4683,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 79.92533,
       "lat": 37.110687
@@ -4545,6 +4711,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 81.317946,
       "lat": 43.92186
@@ -4572,6 +4739,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 80.105498,
       "lat": 32.503187
@@ -4599,6 +4767,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 88.885148,
       "lat": 29.267519
@@ -4626,6 +4795,7 @@
       "nameStatus": "标准",
       "anomalyCode": null,
       "anomalyNote": "",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 97.178452,
       "lat": 31.136875
@@ -4653,9 +4823,430 @@
       "nameStatus": "行政区待核",
       "anomalyCode": "district-equals-city",
       "anomalyNote": "区字段与市重复（大连市），未编造区名",
+      "dataSource": "飞书快照",
       "coordinateLevel": "city-center",
       "lng": 121.618622,
       "lat": 38.91459
+    },
+    {
+      "id": "local-manual:20261119:大理白族自治州",
+      "recordId": "local-manual:20261119:大理白族自治州",
+      "network": "二网",
+      "sequence": 172,
+      "code": "",
+      "region": "西南区",
+      "name": "猛士大理授权店",
+      "originalName": "",
+      "fullName": "",
+      "province": "云南省",
+      "city": "大理白族自治州",
+      "district": "",
+      "address": "",
+      "level": "",
+      "storeType": "",
+      "functionType": "",
+      "rating": "",
+      "status": "",
+      "sourceView": "",
+      "nameStatus": "标准",
+      "anomalyCode": null,
+      "anomalyNote": "",
+      "dataSource": "用户手工新增，未同步飞书",
+      "coordinateLevel": "city-center",
+      "lng": 100.225668,
+      "lat": 25.589449
+    },
+    {
+      "id": "local-manual:20261119:锡林郭勒盟",
+      "recordId": "local-manual:20261119:锡林郭勒盟",
+      "network": "二网",
+      "sequence": 173,
+      "code": "",
+      "region": "西北区",
+      "name": "猛士锡林郭勒授权店",
+      "originalName": "",
+      "fullName": "",
+      "province": "内蒙古自治区",
+      "city": "锡林郭勒盟",
+      "district": "",
+      "address": "",
+      "level": "",
+      "storeType": "",
+      "functionType": "",
+      "rating": "",
+      "status": "",
+      "sourceView": "",
+      "nameStatus": "标准",
+      "anomalyCode": null,
+      "anomalyNote": "",
+      "dataSource": "用户手工新增，未同步飞书",
+      "coordinateLevel": "city-center",
+      "lng": 116.090996,
+      "lat": 43.944018
+    },
+    {
+      "id": "local-manual:20261119:嘉兴市",
+      "recordId": "local-manual:20261119:嘉兴市",
+      "network": "二网",
+      "sequence": 174,
+      "code": "",
+      "region": "华东区",
+      "name": "猛士嘉兴授权店",
+      "originalName": "",
+      "fullName": "",
+      "province": "浙江省",
+      "city": "嘉兴市",
+      "district": "",
+      "address": "",
+      "level": "",
+      "storeType": "",
+      "functionType": "",
+      "rating": "",
+      "status": "",
+      "sourceView": "",
+      "nameStatus": "标准",
+      "anomalyCode": null,
+      "anomalyNote": "",
+      "dataSource": "用户手工新增，未同步飞书",
+      "coordinateLevel": "city-center",
+      "lng": 120.750865,
+      "lat": 30.762653
+    },
+    {
+      "id": "local-manual:20261119:清远市",
+      "recordId": "local-manual:20261119:清远市",
+      "network": "二网",
+      "sequence": 175,
+      "code": "",
+      "region": "华南区",
+      "name": "猛士清远授权店",
+      "originalName": "",
+      "fullName": "",
+      "province": "广东省",
+      "city": "清远市",
+      "district": "",
+      "address": "",
+      "level": "",
+      "storeType": "",
+      "functionType": "",
+      "rating": "",
+      "status": "",
+      "sourceView": "",
+      "nameStatus": "标准",
+      "anomalyCode": null,
+      "anomalyNote": "",
+      "dataSource": "用户手工新增，未同步飞书",
+      "coordinateLevel": "city-center",
+      "lng": 113.051227,
+      "lat": 23.685022
+    },
+    {
+      "id": "local-manual:20261119:绍兴市",
+      "recordId": "local-manual:20261119:绍兴市",
+      "network": "二网",
+      "sequence": 176,
+      "code": "",
+      "region": "华东区",
+      "name": "猛士绍兴授权店",
+      "originalName": "",
+      "fullName": "",
+      "province": "浙江省",
+      "city": "绍兴市",
+      "district": "",
+      "address": "",
+      "level": "",
+      "storeType": "",
+      "functionType": "",
+      "rating": "",
+      "status": "",
+      "sourceView": "",
+      "nameStatus": "标准",
+      "anomalyCode": null,
+      "anomalyNote": "",
+      "dataSource": "用户手工新增，未同步飞书",
+      "coordinateLevel": "city-center",
+      "lng": 120.582112,
+      "lat": 29.997117
+    },
+    {
+      "id": "local-manual:20261119:桂林市",
+      "recordId": "local-manual:20261119:桂林市",
+      "network": "二网",
+      "sequence": 177,
+      "code": "",
+      "region": "华南区",
+      "name": "猛士桂林授权店",
+      "originalName": "",
+      "fullName": "",
+      "province": "广西壮族自治区",
+      "city": "桂林市",
+      "district": "",
+      "address": "",
+      "level": "",
+      "storeType": "",
+      "functionType": "",
+      "rating": "",
+      "status": "",
+      "sourceView": "",
+      "nameStatus": "标准",
+      "anomalyCode": null,
+      "anomalyNote": "",
+      "dataSource": "用户手工新增，未同步飞书",
+      "coordinateLevel": "city-center",
+      "lng": 110.299121,
+      "lat": 25.274215
+    },
+    {
+      "id": "local-manual:20261119:保山市",
+      "recordId": "local-manual:20261119:保山市",
+      "network": "二网",
+      "sequence": 178,
+      "code": "",
+      "region": "西南区",
+      "name": "猛士保山授权店",
+      "originalName": "",
+      "fullName": "",
+      "province": "云南省",
+      "city": "保山市",
+      "district": "",
+      "address": "",
+      "level": "",
+      "storeType": "",
+      "functionType": "",
+      "rating": "",
+      "status": "",
+      "sourceView": "",
+      "nameStatus": "标准",
+      "anomalyCode": null,
+      "anomalyNote": "",
+      "dataSource": "用户手工新增，未同步飞书",
+      "coordinateLevel": "city-center",
+      "lng": 99.167133,
+      "lat": 25.111802
+    },
+    {
+      "id": "local-manual:20261119:济宁市",
+      "recordId": "local-manual:20261119:济宁市",
+      "network": "二网",
+      "sequence": 179,
+      "code": "",
+      "region": "华北区",
+      "name": "猛士济宁授权店",
+      "originalName": "",
+      "fullName": "",
+      "province": "山东省",
+      "city": "济宁市",
+      "district": "",
+      "address": "",
+      "level": "",
+      "storeType": "",
+      "functionType": "",
+      "rating": "",
+      "status": "",
+      "sourceView": "",
+      "nameStatus": "标准",
+      "anomalyCode": null,
+      "anomalyNote": "",
+      "dataSource": "用户手工新增，未同步飞书",
+      "coordinateLevel": "city-center",
+      "lng": 116.587245,
+      "lat": 35.415393
+    },
+    {
+      "id": "local-manual:20261119:德阳市",
+      "recordId": "local-manual:20261119:德阳市",
+      "network": "二网",
+      "sequence": 180,
+      "code": "",
+      "region": "西南区",
+      "name": "猛士德阳授权店",
+      "originalName": "",
+      "fullName": "",
+      "province": "四川省",
+      "city": "德阳市",
+      "district": "",
+      "address": "",
+      "level": "",
+      "storeType": "",
+      "functionType": "",
+      "rating": "",
+      "status": "",
+      "sourceView": "",
+      "nameStatus": "标准",
+      "anomalyCode": null,
+      "anomalyNote": "",
+      "dataSource": "用户手工新增，未同步飞书",
+      "coordinateLevel": "city-center",
+      "lng": 104.398651,
+      "lat": 31.127991
+    },
+    {
+      "id": "local-manual:20261119:连云港市",
+      "recordId": "local-manual:20261119:连云港市",
+      "network": "二网",
+      "sequence": 181,
+      "code": "",
+      "region": "华东区",
+      "name": "猛士连云港授权店",
+      "originalName": "",
+      "fullName": "",
+      "province": "江苏省",
+      "city": "连云港市",
+      "district": "",
+      "address": "",
+      "level": "",
+      "storeType": "",
+      "functionType": "",
+      "rating": "",
+      "status": "",
+      "sourceView": "",
+      "nameStatus": "标准",
+      "anomalyCode": null,
+      "anomalyNote": "",
+      "dataSource": "用户手工新增，未同步飞书",
+      "coordinateLevel": "city-center",
+      "lng": 119.178821,
+      "lat": 34.600018
+    },
+    {
+      "id": "local-manual:20261119:临汾市",
+      "recordId": "local-manual:20261119:临汾市",
+      "network": "二网",
+      "sequence": 182,
+      "code": "",
+      "region": "西北区",
+      "name": "猛士临汾授权店",
+      "originalName": "",
+      "fullName": "",
+      "province": "山西省",
+      "city": "临汾市",
+      "district": "",
+      "address": "",
+      "level": "",
+      "storeType": "",
+      "functionType": "",
+      "rating": "",
+      "status": "",
+      "sourceView": "",
+      "nameStatus": "标准",
+      "anomalyCode": null,
+      "anomalyNote": "",
+      "dataSource": "用户手工新增，未同步飞书",
+      "coordinateLevel": "city-center",
+      "lng": 111.517973,
+      "lat": 36.08415
+    },
+    {
+      "id": "local-manual:20261119:大庆市",
+      "recordId": "local-manual:20261119:大庆市",
+      "network": "二网",
+      "sequence": 183,
+      "code": "",
+      "region": "华北区",
+      "name": "猛士大庆授权店",
+      "originalName": "",
+      "fullName": "",
+      "province": "黑龙江省",
+      "city": "大庆市",
+      "district": "",
+      "address": "",
+      "level": "",
+      "storeType": "",
+      "functionType": "",
+      "rating": "",
+      "status": "",
+      "sourceView": "",
+      "nameStatus": "标准",
+      "anomalyCode": null,
+      "anomalyNote": "",
+      "dataSource": "用户手工新增，未同步飞书",
+      "coordinateLevel": "city-center",
+      "lng": 125.11272,
+      "lat": 46.590734
+    },
+    {
+      "id": "local-manual:20261119:运城市",
+      "recordId": "local-manual:20261119:运城市",
+      "network": "二网",
+      "sequence": 184,
+      "code": "",
+      "region": "西北区",
+      "name": "猛士运城授权店",
+      "originalName": "",
+      "fullName": "",
+      "province": "山西省",
+      "city": "运城市",
+      "district": "",
+      "address": "",
+      "level": "",
+      "storeType": "",
+      "functionType": "",
+      "rating": "",
+      "status": "",
+      "sourceView": "",
+      "nameStatus": "标准",
+      "anomalyCode": null,
+      "anomalyNote": "",
+      "dataSource": "用户手工新增，未同步飞书",
+      "coordinateLevel": "city-center",
+      "lng": 111.003957,
+      "lat": 35.022778
+    },
+    {
+      "id": "local-manual:20261119:三门峡市",
+      "recordId": "local-manual:20261119:三门峡市",
+      "network": "二网",
+      "sequence": 185,
+      "code": "",
+      "region": "华中1区",
+      "name": "猛士三门峡授权店",
+      "originalName": "",
+      "fullName": "",
+      "province": "河南省",
+      "city": "三门峡市",
+      "district": "",
+      "address": "",
+      "level": "",
+      "storeType": "",
+      "functionType": "",
+      "rating": "",
+      "status": "",
+      "sourceView": "",
+      "nameStatus": "标准",
+      "anomalyCode": null,
+      "anomalyNote": "",
+      "dataSource": "用户手工新增，未同步飞书",
+      "coordinateLevel": "city-center",
+      "lng": 111.194099,
+      "lat": 34.777338
+    },
+    {
+      "id": "local-manual:20261119:济源市",
+      "recordId": "local-manual:20261119:济源市",
+      "network": "二网",
+      "sequence": 186,
+      "code": "",
+      "region": "华中1区",
+      "name": "猛士济源授权店",
+      "originalName": "",
+      "fullName": "",
+      "province": "河南省",
+      "city": "济源市",
+      "district": "",
+      "address": "",
+      "level": "",
+      "storeType": "",
+      "functionType": "",
+      "rating": "",
+      "status": "",
+      "sourceView": "",
+      "nameStatus": "标准",
+      "anomalyCode": null,
+      "anomalyNote": "",
+      "dataSource": "用户手工新增，未同步飞书",
+      "coordinateLevel": "city-center",
+      "lng": 112.590047,
+      "lat": 35.090378
     }
   ]
 }

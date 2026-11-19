@@ -94,6 +94,17 @@ test("区字段与市重复时不编造区名，展示名不含该地点", () =>
   }
 });
 
+test("只有城市信息时按市、州、盟生成展示名，不编造区", () => {
+  assert.equal(buildSecondNetworkName({ province: "浙江省", city: "嘉兴市", district: "", level: "地级市" }).name, "猛士嘉兴授权店");
+  assert.equal(buildSecondNetworkName({ province: "云南省", city: "大理白族自治州", district: "", level: "自治州" }).name, "猛士大理授权店");
+  assert.equal(buildSecondNetworkName({ province: "内蒙古自治区", city: "锡林郭勒盟", district: "", level: "盟" }).name, "猛士锡林郭勒授权店");
+  assert.equal(buildSecondNetworkName({ province: "河南省", city: "济源市", district: "", level: "省直辖县级市" }).name, "猛士济源授权店");
+  const jiaxing = buildSecondNetworkName({ province: "浙江省", city: "嘉兴市", district: "", level: "地级市" });
+  assert.equal(jiaxing.district, "");
+  assert.equal(jiaxing.status, "standard");
+  assert.equal(jiaxing.city, "嘉兴市");
+});
+
 test("自治区直辖县级市区留空时保留城市，不编造区", () => {
   for (const [city, displayName] of [["北屯市", "猛士北屯授权店"], ["石河子市", "猛士石河子授权店"]]) {
     const result = buildSecondNetworkName({

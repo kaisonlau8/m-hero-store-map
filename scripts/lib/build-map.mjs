@@ -33,6 +33,7 @@ export function buildMapDocument(stores, { centers, sourceMeta }) {
       nameStatus: store.nameStatus,
       anomalyCode: store.anomalyCode || null,
       anomalyNote: store.anomalyNote ?? "",
+      dataSource: store.dataSource || "",
       coordinateLevel: "city-center",
       lng: center[0],
       lat: center[1],
