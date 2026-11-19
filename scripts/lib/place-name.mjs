@@ -187,6 +187,17 @@ export function buildSecondNetworkName(input = {}) {
     return anomalyResult(fields, "city-missing", district);
   }
   if (MISSING_DISTRICT.has(district)) {
+    const level = String(input.level ?? "");
+    const cityShort = shortenAdminName(city);
+    if (/直辖县级/.test(level) && cityShort.length >= 2) {
+      return {
+        ...fields,
+        name: `猛士${cityShort}授权店`,
+        status: "standard",
+        anomalyCode: null,
+        anomalyNote: "",
+      };
+    }
     return anomalyResult(fields, "district-missing", district);
   }
   if (district === city) {

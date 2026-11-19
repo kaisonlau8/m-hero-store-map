@@ -23,6 +23,7 @@ if (!sourceTime) {
       sourceLabel: path.basename(workbookPath),
       firstView: workbook.summary.firstView,
       secondView: workbook.summary.secondView,
+      sourceNote: workbook.summary.sourceNote,
     },
   });
   if (!result.document) {

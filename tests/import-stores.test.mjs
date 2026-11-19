@@ -143,6 +143,19 @@ test("店名里的手机号尾注不进入发布文本，店代码保留", () =>
   assert.equal(dalian.originalName.includes("13390543021"), false);
   assert.equal(dalian.fullName, "大连冀东汽车贸易有限公司");
   assert.equal(result.stores.find((store) => store.code === "MSFWWD031").originalName, "猛士盐城授权服务中心（请电话预约）");
+  const hidden = normalizeSnapshot(snapshot([
+    record({
+      record_id: "rec-dalian-hidden",
+      门店编码: "MSFWWD131",
+      名称: "猛士大连授权服务中心（进店时请预约[电话已隐]））",
+      省: "辽宁省",
+      市: "大连市",
+      区: "大连市",
+    }),
+  ])).stores[0];
+  assert.equal(hidden.originalName, "猛士大连授权服务中心（进店时请预约）");
+  assert.equal(hidden.originalName.includes("电话已隐"), false);
+  assert.equal(hidden.code, "MSFWWD131");
 });
 
 test("重复 record_id 报错且不合并成一条", () => {

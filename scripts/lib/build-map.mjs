@@ -53,6 +53,7 @@ export function buildMapDocument(stores, { centers, sourceMeta }) {
       mapGeoJson: "china.geojson",
       coordinateLevel: "city-center",
       coordinateNote: CITY_CENTER_NOTE,
+      sourceNote: sourceMeta.sourceNote ?? "",
       counts: {
         total: located.length,
         firstNetwork: located.filter((store) => store.network === "一网").length,

@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-19T10:59:42+08:00",
+  "generatedAt": "2026-11-19T11:45:35+08:00",
   "source": "售后网点省市覆盖.xlsx",
-  "sourceTime": "2026-11-19T10:59:42+08:00",
+  "sourceTime": "2026-11-19T11:45:35+08:00",
   "sourceViews": {
     "firstNetwork": "开业门店清单 / 有售后视图 vewW8YCXOD",
     "secondNetwork": "二网信息 / 表格 vew8ip5Nf3"
@@ -9,12 +9,13 @@
   "mapGeoJson": "china.geojson",
   "coordinateLevel": "city-center",
   "coordinateNote": "点位使用城市行政中心，同城门店只做防重叠散开，不是门店精确坐标。",
+  "sourceNote": "纠正时间 2026-11-19 11:45:35 UTC+08:00。只更新 3 条二网（MSFWWD098、MSFWWD129、MSFWWD128）。一网仍为 2026-11-19 10:59:42 UTC+08:00 的有售后视图，修订号 147，不是本次全表新读。",
   "counts": {
     "total": 171,
     "firstNetwork": 114,
     "secondNetwork": 57,
     "provinces": 31,
-    "cities": 145
+    "cities": 146
   },
   "anomalies": [
     {
@@ -3717,13 +3718,13 @@
       "network": "二网",
       "sequence": 137,
       "code": "MSFWWD098",
-      "region": "华北区",
-      "name": "猛士北京海淀授权店",
+      "region": "西南区",
+      "name": "猛士林芝巴宜授权店",
       "originalName": "猛士林芝授权服务中心",
       "fullName": "北京华盛昌裕达汽车贸易有限公司",
-      "province": "北京市",
-      "city": "北京市",
-      "district": "海淀区",
+      "province": "西藏自治区",
+      "city": "林芝市",
+      "district": "巴宜区",
       "address": "",
       "level": "",
       "storeType": "经销店",
@@ -3735,8 +3736,8 @@
       "anomalyCode": null,
       "anomalyNote": "",
       "coordinateLevel": "city-center",
-      "lng": 116.405285,
-      "lat": 39.904989
+      "lng": 94.362348,
+      "lat": 29.654693
     },
     {
       "id": "recvxweDzup4WR",
@@ -4393,12 +4394,12 @@
       "sequence": 162,
       "code": "MSFWWD129",
       "region": "西南区",
-      "name": "猛士阿勒泰阿勒泰授权店",
+      "name": "猛士北屯授权店",
       "originalName": "猛士北屯授权服务中心",
       "fullName": "新疆祥辉汽车销售服务有限公司",
       "province": "新疆维吾尔自治区",
-      "city": "阿勒泰地区",
-      "district": "阿勒泰市",
+      "city": "北屯市",
+      "district": "",
       "address": "",
       "level": "",
       "storeType": "经销店",
@@ -4410,8 +4411,8 @@
       "anomalyCode": null,
       "anomalyNote": "",
       "coordinateLevel": "city-center",
-      "lng": 88.13963,
-      "lat": 47.848393
+      "lng": 87.824932,
+      "lat": 47.353177
     },
     {
       "id": "recvxweDzucscd",
@@ -4420,12 +4421,12 @@
       "sequence": 163,
       "code": "MSFWWD128",
       "region": "西南区",
-      "name": "猛士塔城塔城授权店",
+      "name": "猛士石河子授权店",
       "originalName": "猛士汽车石河子授权服务中心",
       "fullName": "石河子市升辉汽车销售有限公司",
       "province": "新疆维吾尔自治区",
-      "city": "塔城地区",
-      "district": "塔城市",
+      "city": "石河子市",
+      "district": "",
       "address": "",
       "level": "",
       "storeType": "经销店",
@@ -4437,8 +4438,8 @@
       "anomalyCode": null,
       "anomalyNote": "",
       "coordinateLevel": "city-center",
-      "lng": 82.985732,
-      "lat": 46.746301
+      "lng": 86.041075,
+      "lat": 44.305886
     },
     {
       "id": "recvxweDzuMVJ0",

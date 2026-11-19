@@ -123,6 +123,7 @@ function writeSummarySheet(workbook, summary, sourceMeta) {
   sheet.addRow(["快照时间", sourceMeta.sourceTime, "导入源时间；重复导入保持不变"]);
   sheet.addRow(["一网来源", sourceMeta.firstView ?? "", "只读溯源，不回写飞书"]);
   sheet.addRow(["二网来源", sourceMeta.secondView ?? "", "只读溯源，不回写飞书"]);
+  sheet.addRow(["数据口径", sourceMeta.sourceNote ?? "", "只说明本次纠正范围，不表示一网在该时点全表重读"]);
   const metrics = [
     ["售后网点合计", summary.total, "一网与二网相加"],
     ["一网", summary.firstNetwork, "开业门店清单的有售后视图"],
@@ -224,7 +225,7 @@ export async function writeCoverageWorkbook(filePath, { stores, geography, provi
 }
 
 function readSummary(sheet) {
-  const summary = { firstNetwork: 0, secondNetwork: 0, total: 0, sourceTime: "", firstView: "", secondView: "" };
+  const summary = { firstNetwork: 0, secondNetwork: 0, total: 0, sourceTime: "", firstView: "", secondView: "", sourceNote: "" };
   const provinceCustomers = {};
   let mode = "metrics";
   for (const row of sheetRows(sheet)) {
@@ -238,6 +239,7 @@ function readSummary(sheet) {
       if (label === "快照时间") summary.sourceTime = second;
       if (label === "一网来源") summary.firstView = second;
       if (label === "二网来源") summary.secondView = second;
+      if (label === "数据口径") summary.sourceNote = second;
       if (label === "售后网点合计") summary.total = Number(second);
       if (label === "一网") summary.firstNetwork = Number(second);
       if (label === "二网") summary.secondNetwork = Number(second);

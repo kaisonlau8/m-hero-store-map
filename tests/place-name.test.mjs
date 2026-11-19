@@ -94,6 +94,24 @@ test("区字段与市重复时不编造区名，展示名不含该地点", () =>
   }
 });
 
+test("自治区直辖县级市区留空时保留城市，不编造区", () => {
+  for (const [city, displayName] of [["北屯市", "猛士北屯授权店"], ["石河子市", "猛士石河子授权店"]]) {
+    const result = buildSecondNetworkName({
+      province: "新疆维吾尔自治区",
+      city,
+      district: "",
+      level: "省直辖县级市",
+    });
+    assert.equal(result.status, "standard");
+    assert.equal(result.anomalyCode, null);
+    assert.equal(result.name, displayName);
+    assert.equal(result.city, city);
+    assert.equal(result.district, "");
+    assert.equal(result.name.includes("区"), false);
+  }
+  assert.equal(buildSecondNetworkName({ city: "林芝市", district: "巴宜区" }).name, "猛士林芝巴宜授权店");
+});
+
 test("无区、缺失值和无法识别的区名都降级且不把原文写进展示名", () => {
   for (const district of ["", "无", "—", "冀东"]) {
     const result = buildSecondNetworkName({ city: "大连市", district, code: "MSFWWD131" });

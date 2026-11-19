@@ -27,11 +27,25 @@ export function sourceMetaFromSnapshot(snapshot) {
     sourceLabel: "售后网点省市覆盖.xlsx",
     firstView: `${meta.t1?.table_name ?? "开业门店清单"} / ${meta.t1?.view_name ?? "有售后视图"} ${meta.t1?.view_id ?? ""}`.trim(),
     secondView: `${meta.t2?.table_name ?? "二网信息"} / ${meta.t2?.view_name ?? "表格"} ${meta.t2?.view_id ?? ""}`.trim(),
+    sourceNote: sourceNoteFromSnapshot(meta),
   };
 }
 
+function sourceNoteFromSnapshot(meta) {
+  const correction = meta.correction;
+  if (!correction) return "";
+  const codes = (correction.records ?? []).map((row) => row.门店编码).filter(Boolean);
+  const basedOn = meta.based_on_snapshot || "先前快照";
+  return [
+    `纠正时间 ${correction.at || meta.source_time}。`,
+    `只更新 ${codes.length} 条二网${codes.length ? `（${codes.join("、")}）` : ""}。`,
+    `一网仍为 ${basedOn} 的有售后视图，修订号 ${correction.t1_rev_unchanged ?? "未变"}，不是本次全表新读。`,
+  ].join("");
+}
+
 export async function importSnapshot({ snapshot, geography, provinceCustomers, centers }) {
-  const normalized = normalizeSnapshot(snapshot);
+  const levels = new Map((geography ?? []).map((row) => [`${row.province}\0${row.city}`, row.level ?? ""]));
+  const normalized = normalizeSnapshot(snapshot, { levels });
   const warnings = [...normalized.warnings];
   for (const store of normalized.stores) {
     const known = geography.some((row) => row.province === store.province && row.city === store.city);

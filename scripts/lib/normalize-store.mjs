@@ -7,6 +7,7 @@ const LANDLINE_PATTERN = /(?<!\d)0\d{2,3}[-\s]?\d{7,8}(?!\d)/g;
 
 export function redactContacts(value) {
   let text = String(value ?? "");
+  text = text.replace(/\[(?:电话|手机|邮箱)已隐\]/g, "");
   text = text.replace(EMAIL_PATTERN, "");
   text = text.replace(MOBILE_PATTERN, "");
   text = text.replace(LANDLINE_PATTERN, "");
@@ -34,7 +35,7 @@ function text(value) {
   return String(value ?? "").trim();
 }
 
-export function normalizeSnapshot(snapshot) {
+export function normalizeSnapshot(snapshot, { levels = new Map() } = {}) {
   const records = snapshot?.records ?? [];
   const errors = [];
   const warnings = [];
@@ -69,7 +70,13 @@ export function normalizeSnapshot(snapshot) {
     let anomalyCode = "";
     let anomalyNote = "";
     if (network === "二网") {
-      const display = buildSecondNetworkName({ province, city, district, code });
+      const display = buildSecondNetworkName({
+        province,
+        city,
+        district,
+        code,
+        level: levels.get(`${province}\0${city}`) ?? "",
+      });
       name = display.name;
       nameStatus = display.status === "anomaly" ? "行政区待核" : "标准";
       anomalyCode = display.anomalyCode ?? "";
