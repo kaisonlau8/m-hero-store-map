@@ -205,6 +205,8 @@ test("Excel 与地图 JSON 一致、可重复导入，且不把缺失地址写�
 
   assert.deepEqual(secondRead.stores, firstRead.stores);
   assert.equal(secondRead.stores.length, 3);
+  assert.equal(secondRead.stores.find((store) => store.recordId === "rec-dalian").anomalyCode, "district-equals-city");
+  assert.equal(secondRead.stores.find((store) => store.recordId === "rec-yan").anomalyCode, "");
   assert.deepEqual(
     secondRead.stores.map((store) => store.recordId),
     ["rec-yan", "rec-dalian", "rec-nj"],

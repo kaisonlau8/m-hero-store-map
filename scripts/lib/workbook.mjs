@@ -15,6 +15,7 @@ export const STORE_HEADERS = [
   "门店类型",
   "来源视图",
   "展示名状态",
+  "异常代码",
   "异常说明",
 ];
 
@@ -199,11 +200,12 @@ function writeStoreSheet(workbook, stores) {
       store.storeType,
       store.sourceView,
       store.nameStatus,
+      store.anomalyCode ?? "",
       store.anomalyNote,
     ]);
   }
   sheet.views = [{ state: "frozen", ySplit: 1 }];
-  sheet.autoFilter = { from: "A1", to: "O1" };
+  sheet.autoFilter = { from: "A1", to: "P1" };
   sheet.getColumn(4).width = 36;
   sheet.getColumn(5).width = 42;
   sheet.getColumn(6).width = 42;
@@ -292,7 +294,7 @@ function readStores(sheet) {
     storeType: cellText(row, index.get("门店类型")),
     sourceView: cellText(row, index.get("来源视图")),
     nameStatus: cellText(row, index.get("展示名状态")),
-    anomalyCode: "",
+    anomalyCode: cellText(row, index.get("异常代码")),
     anomalyNote: cellText(row, index.get("异常说明")),
   })).filter((store) => store.recordId || store.code || store.name);
 }
