@@ -189,7 +189,8 @@ export function buildSecondNetworkName(input = {}) {
   if (MISSING_DISTRICT.has(district)) {
     const level = String(input.level ?? "");
     const cityShort = shortenAdminName(city);
-    if (/直辖县级/.test(level) && cityShort.length >= 2) {
+    const cityOnlyLevels = new Set(["地级市", "自治州", "盟", "地区", "省直辖县级市", "省直辖县级"]);
+    if (cityOnlyLevels.has(level) && cityShort.length >= 2) {
       return {
         ...fields,
         name: `猛士${cityShort}授权店`,

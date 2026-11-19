@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 import { buildMapDocument } from "./lib/build-map.mjs";
+import { appendManualCityAdditions, MANUAL_ID_PREFIX } from "./lib/manual-additions.mjs";
 import { normalizeSnapshot } from "./lib/normalize-store.mjs";
 import { readGeographyTemplate, writeCoverageWorkbook } from "./lib/workbook.mjs";
 
@@ -12,6 +13,7 @@ const workbookPath = fileURLToPath(new URL("../data/source/售后网点省市覆
 const centersPath = fileURLToPath(new URL("../data/geo/city-centers.json", import.meta.url));
 const outputPath = fileURLToPath(new URL("../assets/stores.json", import.meta.url));
 const reportPath = fileURLToPath(new URL("../data/source/import-report.json", import.meta.url));
+const manualPath = fileURLToPath(new URL("../data/source/manual-additions/2026-11-19-second-network-cities.json", import.meta.url));
 
 export function canonicalSourceTime(value) {
   const text = String(value ?? "").trim();
@@ -43,7 +45,20 @@ function sourceNoteFromSnapshot(meta) {
   ].join("");
 }
 
-export async function importSnapshot({ snapshot, geography, provinceCustomers, centers }) {
+export function applyManualSpec(stores, geography, sourceMeta, spec) {
+  const labeled = stores.map((store) => ({
+    ...store,
+    dataSource: store.dataSource || (String(store.recordId).startsWith(MANUAL_ID_PREFIX) ? "" : "飞书快照"),
+  }));
+  const manual = appendManualCityAdditions(labeled, geography, spec);
+  const manualNote = `${spec.cities.length} 条二网为用户手工新增，未同步飞书，无飞书 record_id 与门店编码。`;
+  const sourceNote = sourceMeta.sourceNote?.includes("用户手工新增")
+    ? sourceMeta.sourceNote
+    : `${sourceMeta.sourceNote || ""}${manualNote}`;
+  return { ...manual, sourceMeta: { ...sourceMeta, sourceNote } };
+}
+
+export async function importSnapshot({ snapshot, geography, provinceCustomers, centers, manualSpec }) {
   const levels = new Map((geography ?? []).map((row) => [`${row.province}\0${row.city}`, row.level ?? ""]));
   const normalized = normalizeSnapshot(snapshot, { levels });
   const warnings = [...normalized.warnings];
@@ -55,13 +70,20 @@ export async function importSnapshot({ snapshot, geography, provinceCustomers, c
   if (normalized.errors.length) {
     return { ok: false, errors: normalized.errors, warnings, sourceMeta, stores: normalized.stores };
   }
-  const map = buildMapDocument(normalized.stores, { centers, sourceMeta });
+  const applied = manualSpec
+    ? applyManualSpec(normalized.stores, geography, sourceMeta, manualSpec)
+    : { stores: normalized.stores, additions: [], errors: [], notes: [], sourceMeta };
+  if (applied.errors.length) {
+    return { ok: false, errors: applied.errors, warnings, sourceMeta: applied.sourceMeta, stores: applied.stores };
+  }
+  const map = buildMapDocument(applied.stores, { centers, sourceMeta: applied.sourceMeta });
   return {
     ok: map.errors.length === 0,
     errors: map.errors,
-    warnings,
-    sourceMeta,
-    stores: normalized.stores,
+    warnings: [...warnings, ...applied.notes],
+    sourceMeta: applied.sourceMeta,
+    stores: applied.stores,
+    additions: applied.additions,
     geography,
     provinceCustomers,
     document: map.document,
@@ -70,6 +92,7 @@ export async function importSnapshot({ snapshot, geography, provinceCustomers, c
 
 async function main() {
   const snapshot = JSON.parse(await fs.readFile(snapshotPath, "utf8"));
+  const manualSpec = JSON.parse(await fs.readFile(manualPath, "utf8"));
   const template = await readGeographyTemplate(workbookPath);
   const centerDocument = JSON.parse(await fs.readFile(centersPath, "utf8"));
   const result = await importSnapshot({
@@ -77,6 +100,7 @@ async function main() {
     geography: template.geography,
     provinceCustomers: template.provinceCustomers,
     centers: centerDocument.centers,
+    manualSpec,
   });
   const report = {
     sourceTime: result.sourceMeta.sourceTime,

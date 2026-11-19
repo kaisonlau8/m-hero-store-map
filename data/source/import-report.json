@@ -1,12 +1,188 @@
 {
   "sourceTime": "2026-11-19T11:45:35+08:00",
+  "sourceNote": "纠正时间 2026-11-19 11:45:35 UTC+08:00。只更新 3 条二网（MSFWWD098、MSFWWD129、MSFWWD128）。一网仍为 2026-11-19 10:59:42 UTC+08:00 的有售后视图，修订号 147，不是本次全表新读。15 条二网为用户手工新增，未同步飞书，无飞书 record_id 与门店编码。",
   "counts": {
-    "total": 171,
+    "total": 186,
     "firstNetwork": 114,
-    "secondNetwork": 57
+    "secondNetwork": 72,
+    "provinces": 31,
+    "cities": 160
   },
   "errors": [],
   "warnings": [],
+  "manualAdditions": [
+    {
+      "recordId": "local-manual:20261119:大理白族自治州",
+      "code": "",
+      "name": "猛士大理授权店",
+      "province": "云南省",
+      "city": "大理白族自治州",
+      "district": "",
+      "region": "西南区",
+      "regionStatus": "同省现有门店售后大区唯一",
+      "dataSource": "用户手工新增，未同步飞书"
+    },
+    {
+      "recordId": "local-manual:20261119:锡林郭勒盟",
+      "code": "",
+      "name": "猛士锡林郭勒授权店",
+      "province": "内蒙古自治区",
+      "city": "锡林郭勒盟",
+      "district": "",
+      "region": "西北区",
+      "regionStatus": "同省现有门店售后大区唯一",
+      "dataSource": "用户手工新增，未同步飞书"
+    },
+    {
+      "recordId": "local-manual:20261119:嘉兴市",
+      "code": "",
+      "name": "猛士嘉兴授权店",
+      "province": "浙江省",
+      "city": "嘉兴市",
+      "district": "",
+      "region": "华东区",
+      "regionStatus": "同省现有门店售后大区唯一",
+      "dataSource": "用户手工新增，未同步飞书"
+    },
+    {
+      "recordId": "local-manual:20261119:清远市",
+      "code": "",
+      "name": "猛士清远授权店",
+      "province": "广东省",
+      "city": "清远市",
+      "district": "",
+      "region": "华南区",
+      "regionStatus": "同省现有门店售后大区唯一",
+      "dataSource": "用户手工新增，未同步飞书"
+    },
+    {
+      "recordId": "local-manual:20261119:绍兴市",
+      "code": "",
+      "name": "猛士绍兴授权店",
+      "province": "浙江省",
+      "city": "绍兴市",
+      "district": "",
+      "region": "华东区",
+      "regionStatus": "同省现有门店售后大区唯一",
+      "dataSource": "用户手工新增，未同步飞书"
+    },
+    {
+      "recordId": "local-manual:20261119:桂林市",
+      "code": "",
+      "name": "猛士桂林授权店",
+      "province": "广西壮族自治区",
+      "city": "桂林市",
+      "district": "",
+      "region": "华南区",
+      "regionStatus": "同省现有门店售后大区唯一",
+      "dataSource": "用户手工新增，未同步飞书"
+    },
+    {
+      "recordId": "local-manual:20261119:保山市",
+      "code": "",
+      "name": "猛士保山授权店",
+      "province": "云南省",
+      "city": "保山市",
+      "district": "",
+      "region": "西南区",
+      "regionStatus": "同省现有门店售后大区唯一",
+      "dataSource": "用户手工新增，未同步飞书"
+    },
+    {
+      "recordId": "local-manual:20261119:济宁市",
+      "code": "",
+      "name": "猛士济宁授权店",
+      "province": "山东省",
+      "city": "济宁市",
+      "district": "",
+      "region": "华北区",
+      "regionStatus": "同省现有门店售后大区唯一",
+      "dataSource": "用户手工新增，未同步飞书"
+    },
+    {
+      "recordId": "local-manual:20261119:德阳市",
+      "code": "",
+      "name": "猛士德阳授权店",
+      "province": "四川省",
+      "city": "德阳市",
+      "district": "",
+      "region": "西南区",
+      "regionStatus": "同省现有门店售后大区唯一",
+      "dataSource": "用户手工新增，未同步飞书"
+    },
+    {
+      "recordId": "local-manual:20261119:连云港市",
+      "code": "",
+      "name": "猛士连云港授权店",
+      "province": "江苏省",
+      "city": "连云港市",
+      "district": "",
+      "region": "华东区",
+      "regionStatus": "同省现有门店售后大区唯一",
+      "dataSource": "用户手工新增，未同步飞书"
+    },
+    {
+      "recordId": "local-manual:20261119:临汾市",
+      "code": "",
+      "name": "猛士临汾授权店",
+      "province": "山西省",
+      "city": "临汾市",
+      "district": "",
+      "region": "西北区",
+      "regionStatus": "同省现有门店售后大区唯一",
+      "dataSource": "用户手工新增，未同步飞书"
+    },
+    {
+      "recordId": "local-manual:20261119:大庆市",
+      "code": "",
+      "name": "猛士大庆授权店",
+      "province": "黑龙江省",
+      "city": "大庆市",
+      "district": "",
+      "region": "华北区",
+      "regionStatus": "同省现有门店售后大区唯一",
+      "dataSource": "用户手工新增，未同步飞书"
+    },
+    {
+      "recordId": "local-manual:20261119:运城市",
+      "code": "",
+      "name": "猛士运城授权店",
+      "province": "山西省",
+      "city": "运城市",
+      "district": "",
+      "region": "西北区",
+      "regionStatus": "同省现有门店售后大区唯一",
+      "dataSource": "用户手工新增，未同步飞书"
+    },
+    {
+      "recordId": "local-manual:20261119:三门峡市",
+      "code": "",
+      "name": "猛士三门峡授权店",
+      "province": "河南省",
+      "city": "三门峡市",
+      "district": "",
+      "region": "华中1区",
+      "regionStatus": "同省现有门店售后大区唯一",
+      "dataSource": "用户手工新增，未同步飞书"
+    },
+    {
+      "recordId": "local-manual:20261119:济源市",
+      "code": "",
+      "name": "猛士济源授权店",
+      "province": "河南省",
+      "city": "济源市",
+      "district": "",
+      "region": "华中1区",
+      "regionStatus": "同省现有门店售后大区唯一",
+      "dataSource": "用户手工新增，未同步飞书"
+    }
+  ],
+  "duplicateDisplayNames": [
+    [
+      "猛士授权店（行政区待核）",
+      2
+    ]
+  ],
   "anomalies": [
     {
       "recordId": "recvxweDzu9YxV",
@@ -16,8 +192,7 @@
       "city": "东方市",
       "district": "东方市",
       "name": "猛士授权店（行政区待核）",
-      "anomalyNote": "区字段与市重复（东方市），未编造区名",
-      "address": ""
+      "anomalyNote": "区字段与市重复（东方市），未编造区名"
     },
     {
       "recordId": "reczz28WDhQnIw6r",
@@ -27,8 +202,7 @@
       "city": "大连市",
       "district": "大连市",
       "name": "猛士授权店（行政区待核）",
-      "anomalyNote": "区字段与市重复（大连市），未编造区名",
-      "address": ""
+      "anomalyNote": "区字段与市重复（大连市），未编造区名"
     }
   ]
 }

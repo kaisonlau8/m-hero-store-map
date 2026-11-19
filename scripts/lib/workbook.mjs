@@ -17,6 +17,7 @@ export const STORE_HEADERS = [
   "展示名状态",
   "异常代码",
   "异常说明",
+  "数据来源",
 ];
 
 const GEO_HEADERS = ["省份", "城市", "客户数量", "层级", "是否有店", "网络", "一网家数", "二网家数", "网点合计", "一网门店", "二网门店"];
@@ -203,10 +204,11 @@ function writeStoreSheet(workbook, stores) {
       store.nameStatus,
       store.anomalyCode ?? "",
       store.anomalyNote,
+      store.dataSource ?? "",
     ]);
   }
   sheet.views = [{ state: "frozen", ySplit: 1 }];
-  sheet.autoFilter = { from: "A1", to: "P1" };
+  sheet.autoFilter = { from: "A1", to: "Q1" };
   sheet.getColumn(4).width = 36;
   sheet.getColumn(5).width = 42;
   sheet.getColumn(6).width = 42;
@@ -275,8 +277,9 @@ function readGeography(sheet) {
 function readStores(sheet) {
   const rows = sheetRows(sheet);
   if (!rows.length) throw new Error("门店明细是空的。");
-  const headers = STORE_HEADERS.map((_, index) => cellText(rows[0], index + 1));
-  const missing = STORE_HEADERS.filter((header) => !headers.includes(header));
+  const headers = [];
+  for (let index = 1; cellText(rows[0], index); index += 1) headers.push(cellText(rows[0], index));
+  const missing = STORE_HEADERS.filter((header) => header !== "数据来源" && !headers.includes(header));
   if (missing.length) {
     throw new Error(`门店明细缺少列：${missing.join("、")}。请先用快照重新导入，不要把旧清单当成新数据。`);
   }
@@ -298,6 +301,7 @@ function readStores(sheet) {
     nameStatus: cellText(row, index.get("展示名状态")),
     anomalyCode: cellText(row, index.get("异常代码")),
     anomalyNote: cellText(row, index.get("异常说明")),
+    dataSource: index.has("数据来源") ? cellText(row, index.get("数据来源")) : "",
   })).filter((store) => store.recordId || store.code || store.name);
 }
 
