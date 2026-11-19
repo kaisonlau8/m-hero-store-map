@@ -434,6 +434,10 @@ h2 {
   background: #66798f;
 }
 
+.badge.anomaly {
+  background: #8a5a12;
+}
+
 .info-line {
   margin-top: 8px;
   color: var(--muted);

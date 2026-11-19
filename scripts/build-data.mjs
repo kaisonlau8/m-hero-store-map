@@ -1,296 +1,40 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { createRequire } from "node:module";
+import { fileURLToPath } from "node:url";
 
-const require = createRequire(import.meta.url);
-const runtimeRequire = createRequire("/Users/i/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/");
-const { FileBlob, SpreadsheetFile } = (() => {
-  try {
-    return require("@oai/artifact-tool");
-  } catch {
-    return runtimeRequire("@oai/artifact-tool");
-  }
-})();
+import { buildMapDocument } from "./lib/build-map.mjs";
+import { readCoverageWorkbook } from "./lib/workbook.mjs";
 
-const projectRoot = new URL("../", import.meta.url);
-const sourceDir = new URL("data/source/", projectRoot);
-const sourceXlsx = await resolveSourceWorkbook();
-const outputDir = new URL("../assets/", import.meta.url);
-const dataPath = new URL("stores.json", outputDir);
+const workbookPath = process.argv[2] || process.env.STORE_MAP_XLSX || fileURLToPath(new URL("../data/source/售后网点省市覆盖.xlsx", import.meta.url));
+const centersPath = new URL("../data/geo/city-centers.json", import.meta.url);
+const outputPath = new URL("../assets/stores.json", import.meta.url);
 
-const provinceNameFix = new Map([
-  ["北京", "北京市"],
-  ["天津", "天津市"],
-  ["上海", "上海市"],
-  ["重庆", "重庆市"],
-  ["香港特别行政区", "香港特别行政区"],
-  ["澳门特别行政区", "澳门特别行政区"],
-]);
-
-const manualCityCenters = new Map([
-  ["北京市", [116.405285, 39.904989]],
-  ["天津市", [117.190182, 39.125596]],
-  ["上海市", [121.472644, 31.231706]],
-  ["重庆市", [106.504962, 29.533155]],
-  ["香港特别行政区", [114.173355, 22.320048]],
-  ["澳门特别行政区", [113.54909, 22.198951]],
-]);
-
-const storeAreaCorrections = new Map([
-  [
-    "MSFWWD099",
-    {
-      province: "四川省",
-      city: "成都市",
-      district: "武侯区",
-      address: "四川省成都市武侯区",
+const workbook = await readCoverageWorkbook(workbookPath);
+const centerDocument = JSON.parse(await fs.readFile(centersPath, "utf8"));
+const sourceTime = process.env.STORE_MAP_SOURCE_TIME || workbook.summary.sourceTime;
+if (!sourceTime) {
+  console.error("工作簿缺少快照时间，拒绝用当前时钟生成地图，以免重复构建结果漂移。");
+  process.exitCode = 1;
+} else {
+  const result = buildMapDocument(workbook.stores, {
+    centers: centerDocument.centers,
+    sourceMeta: {
+      sourceTime,
+      sourceLabel: path.basename(workbookPath),
+      firstView: workbook.summary.firstView,
+      secondView: workbook.summary.secondView,
+      sourceNote: workbook.summary.sourceNote,
     },
-  ],
-  [
-    "MSFWWD098",
-    {
-      province: "西藏自治区",
-      city: "林芝市",
-      district: "巴宜区",
-      address: "西藏自治区林芝市巴宜区",
-    },
-  ],
-]);
-
-function clean(value) {
-  return String(value ?? "").trim();
-}
-
-async function resolveSourceWorkbook() {
-  const explicitPath = process.argv[2] || process.env.STORE_MAP_XLSX;
-  if (explicitPath) return path.resolve(explicitPath);
-
-  const preferred = path.join(sourceDir.pathname, "售后网点省市覆盖.xlsx");
-  try {
-    await fs.access(preferred);
-    return preferred;
-  } catch {
-    // Fall back to the older dated store list when the coverage workbook is absent.
-  }
-
-  const entries = await fs.readdir(sourceDir, { withFileTypes: true });
-  const candidates = await Promise.all(
-    entries
-      .filter((entry) => entry.isFile())
-      .filter((entry) => /^猛士售后门店清单\d{8}\.xlsx$/.test(entry.name))
-      .map(async (entry) => {
-        const fullPath = path.join(sourceDir.pathname, entry.name);
-        const dateMatch = entry.name.match(/(\d{8})/);
-        const stat = await fs.stat(fullPath);
-        return { fullPath, dateKey: dateMatch?.[1] ?? "", mtimeMs: stat.mtimeMs };
-      }),
-  );
-
-  if (!candidates.length) {
-    throw new Error(`No workbook matched 猛士售后门店清单YYYYMMDD.xlsx in ${sourceDir.pathname}`);
-  }
-
-  candidates.sort((a, b) => b.dateKey.localeCompare(a.dateKey) || b.mtimeMs - a.mtimeMs);
-  return candidates[0].fullPath;
-}
-
-function provinceForMap(name) {
-  return provinceNameFix.get(clean(name)) || clean(name);
-}
-
-async function fetchJson(url) {
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`Failed to fetch ${url}: ${response.status}`);
-  return response.json();
-}
-
-async function buildCityCenters() {
-  const country = await fetchJson("https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json");
-  const centers = new Map(manualCityCenters);
-
-  for (const feature of country.features ?? []) {
-    const props = feature.properties ?? {};
-    if (props.name && props.center) centers.set(props.name, props.center);
-  }
-
-  for (const feature of country.features ?? []) {
-    const props = feature.properties ?? {};
-    if (!props.adcode || props.adcode === 100000) continue;
-    let province;
-    try {
-      province = await fetchJson(`https://geo.datav.aliyun.com/areas_v3/bound/${props.adcode}_full.json`);
-    } catch {
-      continue;
-    }
-    for (const cityFeature of province.features ?? []) {
-      const cityProps = cityFeature.properties ?? {};
-      if (cityProps.name && cityProps.center) centers.set(cityProps.name, cityProps.center);
-    }
-  }
-
-  return centers;
-}
-
-const workbook = await SpreadsheetFile.importXlsx(await FileBlob.load(sourceXlsx));
-const cityCenters = await buildCityCenters();
-const sheets = new Map(workbook.worksheets.items.map((sheet) => [sheet.name, sheet]));
-
-function sheetRows(sheetName) {
-  const sheet = sheets.get(sheetName);
-  if (!sheet) return null;
-  const range = sheet.getUsedRange()?.address;
-  if (!range) throw new Error(`Sheet ${sheetName} has no used range.`);
-  return sheet.getRange(range).values;
-}
-
-function headerIndex(header) {
-  const index = new Map();
-  header.forEach((cell, position) => {
-    const key = clean(cell);
-    if (key) index.set(key, position);
   });
-  return index;
-}
-
-function cell(row, index, name) {
-  const position = index.get(name);
-  return position == null ? "" : clean(row[position]);
-}
-
-function legacyStores() {
-  const configs = [
-    {
-      sheet: "一网",
-      network: "一网",
-      mapRow(row) {
-        return {
-          sequence: row[0],
-          code: clean(row[1]),
-          region: clean(row[2]),
-          name: clean(row[3]),
-          fullName: "",
-          province: clean(row[4]),
-          city: clean(row[5]),
-          district: clean(row[6]),
-          address: clean(row[7]),
-          level: "",
-          storeType: clean(row[8]),
-          functionType: clean(row[9]),
-          rating: clean(row[10]),
-          status: clean(row[11]),
-        };
-      },
-    },
-    {
-      sheet: "二网",
-      network: "二网",
-      mapRow(row) {
-        return {
-          sequence: row[0],
-          code: clean(row[1]),
-          region: "",
-          name: clean(row[2]),
-          fullName: "",
-          province: clean(row[5]),
-          city: clean(row[6]),
-          district: clean(row[7]),
-          address: `${clean(row[5])}${clean(row[6])}${clean(row[7])}`,
-          level: "",
-          storeType: clean(row[4]),
-          functionType: clean(row[3]),
-          rating: "",
-          status: "",
-        };
-      },
-    },
-  ];
-
-  const rows = [];
-  for (const config of configs) {
-    const values = sheetRows(config.sheet);
-    if (!values) throw new Error(`Workbook is missing sheet ${config.sheet}.`);
-    for (let i = 1; i < values.length; i += 1) {
-      const store = { id: `${config.network}-${i}`, network: config.network, sheet: config.sheet, row: i + 1, ...config.mapRow(values[i]) };
-      const correction = storeAreaCorrections.get(store.code);
-      if (correction) Object.assign(store, correction);
-      rows.push(store);
-    }
+  if (!result.document) {
+    console.error(JSON.stringify({ errors: result.errors }, null, 2));
+    process.exitCode = 1;
+  } else {
+    await fs.writeFile(outputPath, `${JSON.stringify(result.document, null, 2)}\n`);
+    console.log(JSON.stringify({
+      output: outputPath.pathname,
+      counts: result.document.counts,
+      anomalies: result.document.anomalies,
+    }, null, 2));
   }
-  return rows;
 }
-
-function coverageStores() {
-  const values = sheetRows("门店明细");
-  const index = headerIndex(values[0] ?? []);
-  for (const name of ["网络", "门店编码", "门店名称", "省份", "城市"]) {
-    if (!index.has(name)) throw new Error(`Sheet 门店明细 is missing column ${name}.`);
-  }
-
-  const sequenceByNetwork = new Map();
-  const rows = [];
-  for (let i = 1; i < values.length; i += 1) {
-    const row = values[i];
-    const network = cell(row, index, "网络");
-    const sequence = (sequenceByNetwork.get(network) ?? 0) + 1;
-    sequenceByNetwork.set(network, sequence);
-    rows.push({
-      id: `${network}-${sequence}`,
-      network,
-      sheet: "门店明细",
-      row: i + 1,
-      sequence,
-      code: cell(row, index, "门店编码"),
-      region: "",
-      name: cell(row, index, "门店名称"),
-      fullName: cell(row, index, "门店全称"),
-      province: cell(row, index, "省份"),
-      city: cell(row, index, "城市"),
-      district: cell(row, index, "区县"),
-      address: "",
-      level: cell(row, index, "层级"),
-      storeType: "",
-      functionType: "",
-      rating: "",
-      status: "",
-    });
-  }
-  return rows;
-}
-
-const stores = [];
-const missing = [];
-const sourceRows = sheets.has("门店明细") ? coverageStores() : legacyStores();
-
-for (const store of sourceRows) {
-  if (!store.code || !store.name) continue;
-  const center = cityCenters.get(store.city) || cityCenters.get(provinceForMap(store.province));
-  if (!center) {
-    missing.push({ sheet: store.sheet, row: store.row, name: store.name, province: store.province, city: store.city });
-    continue;
-  }
-  delete store.sheet;
-  delete store.row;
-  store.lng = center[0];
-  store.lat = center[1];
-  stores.push(store);
-}
-
-const summary = {
-  generatedAt: new Date().toISOString(),
-  source: path.basename(sourceXlsx),
-  mapGeoJson: "china.geojson",
-  counts: {
-    total: stores.length,
-    firstNetwork: stores.filter((store) => store.network === "一网").length,
-    secondNetwork: stores.filter((store) => store.network === "二网").length,
-    provinces: new Set(stores.map((store) => store.province)).size,
-    cities: new Set(stores.map((store) => store.city)).size,
-  },
-  stores,
-};
-
-await fs.mkdir(outputDir, { recursive: true });
-await fs.writeFile(dataPath, `${JSON.stringify(summary, null, 2)}\n`, "utf8");
-
-console.log(JSON.stringify({ output: dataPath.pathname, counts: summary.counts, missing }, null, 2));
-if (missing.length) process.exitCode = 1;

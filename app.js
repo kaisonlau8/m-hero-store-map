@@ -151,12 +151,20 @@ function htmlEscape(value) {
     .replaceAll("'", "&#039;");
 }
 
+function visibleAddress(store) {
+  const address = String(store.address ?? "").trim();
+  if (!address || address === "无") return "";
+  return address;
+}
+
 function storeMarkup(store) {
   const network = networkClass(store);
   const place = [store.province, store.city, store.district].filter(Boolean).join(" ");
-  const address = store.address && store.address !== place ? store.address : "";
+  const address = visibleAddress(store);
+  const original = store.originalName && store.originalName !== store.name ? store.originalName : "";
   const tags = [
-    `<span class="badge ${network}">${store.network}</span>`,
+    `<span class="badge ${network}">${htmlEscape(store.network)}</span>`,
+    store.nameStatus === "行政区待核" ? `<span class="badge anomaly">行政区待核</span>` : "",
     store.region ? `<span class="badge neutral">${htmlEscape(store.region)}</span>` : "",
     store.functionType ? `<span class="badge neutral">${htmlEscape(store.functionType)}</span>` : "",
     store.level ? `<span class="badge neutral">${htmlEscape(store.level)}</span>` : "",
@@ -166,8 +174,10 @@ function storeMarkup(store) {
     <h3>${htmlEscape(store.name)}</h3>
     <div class="meta">${tags}</div>
     <div class="info-line">${htmlEscape(place)}</div>
+    ${original ? `<div class="info-line">原名 ${htmlEscape(original)}</div>` : ""}
     ${store.fullName ? `<div class="info-line">${htmlEscape(store.fullName)}</div>` : ""}
     ${address ? `<div class="info-line">${htmlEscape(address)}</div>` : ""}
+    ${store.anomalyNote ? `<div class="info-line">${htmlEscape(store.anomalyNote)}</div>` : ""}
     <div class="info-line">${htmlEscape(store.code)}${store.rating ? ` · ${htmlEscape(store.rating)}` : ""}${store.status ? ` · ${htmlEscape(store.status)}` : ""}</div>
   `;
 }
@@ -205,8 +215,10 @@ function matchesStore(store, query) {
   if (!query) return true;
   const haystack = [
     store.name,
+    store.originalName,
     store.fullName,
     store.code,
+    store.recordId,
     store.region,
     store.province,
     store.city,
@@ -237,7 +249,8 @@ function renderStats() {
   els.totalCount.textContent = stores.length;
   els.cityCount.textContent = new Set(stores.map((store) => store.city)).size;
   els.provinceCount.textContent = new Set(stores.map((store) => store.province)).size;
-  els.sourceText.textContent = `${state.data.source} · ${state.data.counts.firstNetwork} 个一网 · ${state.data.counts.secondNetwork} 个二网`;
+  const coordinateNote = state.data.coordinateNote || "点位为城市行政中心";
+  els.sourceText.textContent = `${state.data.source} · ${state.data.counts.firstNetwork} 个一网 · ${state.data.counts.secondNetwork} 个二网 · ${coordinateNote}`;
 }
 
 function renderGeoMap() {
